@@ -1,0 +1,6 @@
+{
+  "name": "Central Prime 3D",
+  "description": "Biblioteca minerada de modelos 3D prontos para imprimir e vender na Shopee e Mercado Livre.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

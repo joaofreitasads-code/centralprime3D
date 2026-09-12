@@ -1,0 +1,1080 @@
+import React, { useState } from 'react';
+import {
+  SELECTED_MODELS,
+  SELECTED_MODELS_ROW2,
+  NICHES,
+  PROOF_IMAGES,
+  BONUSES,
+  TESTIMONIALS,
+  CHECKOUT_URLS,
+} from './data/pageData';
+import { Carousel } from './components/Carousel';
+import { InfiniteMarquee } from './components/InfiniteMarquee';
+import { TestimonialsCarousel } from './components/TestimonialsCarousel';
+import { FaqSection } from './components/FaqSection';
+import { SpecialOfferModal } from './components/SpecialOfferModal';
+
+export default function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const scrollToPremiumOffer = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('oferta-3990');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <div className="min-h-screen text-white relative overflow-hidden bg-black">
+      <div className="relative z-10">
+        {/* HERO SECTION */}
+        <section id="hero" className="px-4 pt-16 pb-16 text-center scroll-mt-16">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider"
+            style={{
+              backgroundColor: 'rgba(255, 0, 60, 0.12)',
+              color: '#ff003c',
+              border: '1.5px solid #ff003c',
+              boxShadow: '0 0 15px rgba(255, 0, 60, 0.35)',
+            }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
+                style={{ backgroundColor: '#ff003c' }}
+              />
+              <span
+                className="relative inline-flex h-2 w-2 rounded-full"
+                style={{ backgroundColor: '#ff003c' }}
+              />
+            </span>
+            PARA QUEM TEM IMPRESSORA 3D E QUER TRANSFORMAR ARQUIVOS EM PRODUTOS
+          </div>
+
+          <h1 className="mt-8 text-4xl md:text-6xl font-black leading-[1.1] max-w-4xl mx-auto uppercase tracking-tight">
+            Pare de{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              escolher no achismo
+            </span>{' '}
+            o que colocar na sua impressora 3D
+          </h1>
+
+          {/* Hero Video */}
+          <div className="mt-10 mx-auto w-full max-w-[360px] relative">
+            <div
+              className="absolute -inset-10 blur-3xl opacity-50"
+              style={{ background: 'radial-gradient(circle at 50% 50%, #ff003c, transparent 70%)' }}
+            />
+            <div
+              className="relative rounded-3xl overflow-hidden"
+              style={{
+                aspectRatio: '9 / 16',
+                border: '2px solid #ff003c',
+                boxShadow: '0 0 45px rgba(255, 0, 60, 0.5), 0 0 15px rgba(255, 0, 60, 0.3)',
+              }}
+            >
+              <video
+                src="https://www.centralprime3d.com.br/assets/0fa52fd653.mp4"
+                poster="https://www.centralprime3d.com.br/assets/68eaec27eb.jpg"
+                title="Vídeo de apresentação da Central Prime 3D"
+                controls
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 h-full w-full object-cover"
+              >
+                Seu navegador não suporta a reprodução deste vídeo.
+              </video>
+            </div>
+          </div>
+
+          <p className="mt-10 text-base md:text-lg max-w-2xl mx-auto text-white/75">
+            Acesse uma biblioteca organizada com modelos selecionados e diferentes categorias para descobrir novas ideias, testar produtos e ampliar as possibilidades da sua impressão 3D.
+          </p>
+
+          <p
+            className="mt-5 text-sm md:text-base font-black uppercase tracking-wide max-w-xl mx-auto"
+            style={{ color: '#ff003c', textShadow: '0 0 10px rgba(255, 0, 60, 0.4)' }}
+          >
+            Menos tempo procurando STL. Mais tempo testando produtos.
+          </p>
+
+          <ul className="mt-10 flex flex-wrap justify-center gap-3 max-w-3xl mx-auto text-sm">
+            <li
+              className="px-4 py-2 rounded-full"
+              style={{
+                border: '1.5px solid #ff003c',
+                backgroundColor: 'rgba(255, 0, 60, 0.1)',
+                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+              }}
+            >
+              ✓ Modelos selecionados
+            </li>
+            <li
+              className="px-4 py-2 rounded-full"
+              style={{
+                border: '1.5px solid #ff003c',
+                backgroundColor: 'rgba(255, 0, 60, 0.1)',
+                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+              }}
+            >
+              ✓ Diversas categorias para explorar
+            </li>
+            <li
+              className="px-4 py-2 rounded-full"
+              style={{
+                border: '1.5px solid #ff003c',
+                backgroundColor: 'rgba(255, 0, 60, 0.1)',
+                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+              }}
+            >
+              ✓ Biblioteca organizada
+            </li>
+            <li
+              className="px-4 py-2 rounded-full"
+              style={{
+                border: '1.5px solid #ff003c',
+                backgroundColor: 'rgba(255, 0, 60, 0.1)',
+                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+              }}
+            >
+              ✓ Novas ideias de produtos
+            </li>
+            <li
+              className="px-4 py-2 rounded-full"
+              style={{
+                border: '1.5px solid #ff003c',
+                backgroundColor: 'rgba(255, 0, 60, 0.1)',
+                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+              }}
+            >
+              ✓ Acesso rápido aos arquivos
+            </li>
+          </ul>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-8 px-8 py-4 rounded-full font-black text-lg uppercase tracking-wider text-black shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 35px rgba(0, 255, 102, 0.7), 0 10px 40px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            QUERO DESCOBRIR O QUE IMPRIMIR ↓
+          </a>
+
+          <p className="mt-4 text-xs tracking-widest text-white/50 font-bold">
+            ACESSO DIGITAL • LIBERAÇÃO RÁPIDA • BIBLIOTECA ORGANIZADA
+          </p>
+        </section>
+
+        {/* SECTION: PRODUTOS / MODELOS SELECIONADOS */}
+        <section id="produtos" className="px-4 py-20 max-w-7xl mx-auto scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black text-center uppercase">
+            COMECE COM{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              MODELOS SELECIONADOS
+            </span>{' '}
+            PARA QUEM QUER TESTAR NOVOS PRODUTOS
+          </h2>
+
+          <p className="mt-4 text-center text-white/70 max-w-2xl mx-auto">
+            Em vez de baixar arquivos aleatórios, explore uma seleção de modelos para criar, testar e ampliar seu catálogo de impressão 3D.
+          </p>
+
+          <div className="mt-10 space-y-4">
+            {/* Linha 1: Modelos Originais (sentido normal para a esquerda) */}
+            <InfiniteMarquee items={SELECTED_MODELS} direction="left" speedSeconds={34} />
+            {/* Linha 2: Novos Modelos Solicitados (sentido para a direita para dinamismo visual) */}
+            <InfiniteMarquee items={SELECTED_MODELS_ROW2} direction="right" speedSeconds={34} />
+          </div>
+
+          <p className="mt-6 text-center text-white/70 max-w-2xl mx-auto text-sm md:text-base">
+            Uma boa impressão começa antes do fatiador: começa escolhendo o produto certo para testar.
+          </p>
+
+          <div className="text-center">
+            <a
+              href="#oferta-3990"
+              onClick={scrollToPremiumOffer}
+              className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+                boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+                color: '#000000',
+              }}
+            >
+              Ver modelos selecionados ↓
+            </a>
+          </div>
+        </section>
+
+        {/* SECTION: O PROBLEMA */}
+        <section id="problema" className="px-4 py-20 max-w-4xl mx-auto text-center scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+            O PROBLEMA NÃO É TER POUCOS ARQUIVOS. É{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              NÃO SABER QUAIS VALEM A PENA TESTAR.
+            </span>
+          </h2>
+
+          <p className="mt-6 text-white/70 max-w-2xl mx-auto">
+            Quem trabalha com impressão 3D conhece esse cenário:
+          </p>
+
+          <ul className="mt-8 space-y-3 text-left max-w-xl mx-auto">
+            <li className="flex items-center gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span className="font-bold text-sm">CENTENAS DE STL SALVOS NO COMPUTADOR</span>
+            </li>
+            <li className="flex items-center gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span className="font-bold text-sm">HORAS PROCURANDO ARQUIVOS</span>
+            </li>
+            <li className="flex items-center gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span className="font-bold text-sm">MODELOS QUE NUNCA SAEM DA PASTA</span>
+            </li>
+            <li className="flex items-center gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span className="font-bold text-sm">FILAMENTO GASTO EM PRODUTOS ESCOLHIDOS SEM DIREÇÃO</span>
+            </li>
+            <li className="flex items-center gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span className="font-bold text-sm">DIFICULDADE PARA DECIDIR O PRÓXIMO ITEM DO CATÁLOGO</span>
+            </li>
+          </ul>
+
+          <p className="mt-10 text-white/70 max-w-2xl mx-auto">
+            Ter milhares de arquivos não significa ter milhares de produtos.
+          </p>
+          <p className="mt-4 text-white/70 max-w-2xl mx-auto">
+            O que realmente importa é encontrar boas ideias, escolher uma categoria e colocar o produto no mercado para testar.
+          </p>
+
+          <p
+            className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-xl font-black uppercase"
+            style={{
+              border: '1.5px solid #ff003c',
+              backgroundColor: 'rgba(255, 0, 60, 0.1)',
+              boxShadow: '0 0 25px rgba(255, 0, 60, 0.3)',
+            }}
+          >
+            Mais arquivos não resolvem o problema.{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              Melhores ideias de produto, sim.
+            </span>
+          </p>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            Quero encontrar novas ideias ↓
+          </a>
+        </section>
+
+        {/* SECTION: CATEGORIAS / NICHOS */}
+        <section id="categorias" className="px-4 py-20 max-w-7xl mx-auto scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black text-center uppercase">
+            EXPLORE DIFERENTES NICHOS{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              SEM COMEÇAR SUA PESQUISA DO ZERO
+            </span>
+          </h2>
+
+          <p className="mt-4 text-center text-white/70 max-w-2xl mx-auto">
+            Navegue por categorias variadas e descubra rapidamente novos tipos de produtos para colocar na sua fila de testes.
+          </p>
+
+          <div className="mt-10">
+            <Carousel items={NICHES} />
+          </div>
+
+          <div className="text-center">
+            <a
+              href="#oferta-3990"
+              onClick={scrollToPremiumOffer}
+              className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+                boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+                color: '#000000',
+              }}
+            >
+              Quero explorar as categorias ↓
+            </a>
+          </div>
+        </section>
+
+        {/* SECTION: PROVAS / MARKET REFERENCIA */}
+        <section id="provas" className="px-4 py-20 max-w-6xl mx-auto text-center scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+            ANTES DE IMPRIMIR, VEJA O QUE{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              JÁ ESTÁ SENDO OFERTADO NO MERCADO
+            </span>
+          </h2>
+
+          <p className="mt-4 text-white/70 max-w-2xl mx-auto">
+            Use referências de marketplaces para observar categorias, produtos e apresentações que já existem no mercado e encontrar novas ideias para seus próprios testes.
+          </p>
+          <p className="mt-4 text-white/60 max-w-2xl mx-auto text-sm">
+            Você não precisa começar toda pesquisa com uma tela em branco.
+          </p>
+
+          <div className="mt-10 flex flex-col gap-4 max-w-2xl mx-auto">
+            {PROOF_IMAGES.map((imgSrc, idx) => (
+              <img
+                key={idx}
+                src={imgSrc}
+                alt={`Prova de venda ${idx + 1}`}
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                className="w-full rounded-xl shadow-xl transition-transform hover:scale-[1.01]"
+                style={{
+                  border: '1.5px solid #ff003c',
+                  boxShadow: '0 0 20px rgba(255, 0, 60, 0.25)',
+                }}
+              />
+            ))}
+          </div>
+
+          <p
+            className="mt-8 text-lg font-black uppercase tracking-wide"
+            style={{ color: '#ff003c', textShadow: '0 0 10px rgba(255, 0, 60, 0.4)' }}
+          >
+            Observe. Escolha. Produza. Teste.
+          </p>
+          <p className="mt-6 text-xs text-white/50">
+            * OS RESULTADOS DEPENDEM DA EXECUÇÃO, DIVULGAÇÃO, PREÇO E DEMANDA DO MERCADO.
+          </p>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            Quero acessar as referências ↓
+          </a>
+        </section>
+
+        {/* SECTION: BONUS */}
+        <section id="bonus" className="px-4 py-20 max-w-6xl mx-auto scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black text-center uppercase max-w-4xl mx-auto">
+            UMA ÚNICA IDEIA PODE VIRAR SEU PRÓXIMO PRODUTO.{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              AQUI VOCÊ TEM MUITAS PARA EXPLORAR.
+            </span>
+          </h2>
+
+          <p className="mt-4 text-center text-white/70 max-w-2xl mx-auto">
+            A Central Prime reúne diferentes categorias em um único lugar para você não depender de uma única linha de produtos.
+          </p>
+
+          <div className="mt-12 grid md:grid-cols-2 gap-6">
+            {BONUSES.map((bonus) => (
+              <div
+                key={bonus.id}
+                className="rounded-2xl overflow-hidden p-4 flex gap-4 items-center transition-all duration-300 hover:scale-[1.02]"
+                style={{
+                  border: '1.5px solid #ff003c',
+                  boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                  backgroundColor: '#1a1c1f',
+                }}
+              >
+                <img
+                  src={bonus.img}
+                  alt={bonus.title}
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  className="w-28 h-28 object-cover rounded-xl flex-shrink-0 bg-neutral-900 border border-[#ff003c55]"
+                />
+                <div>
+                  <div className="text-xs font-bold" style={{ color: '#ff003c', textShadow: '0 0 6px rgba(255, 0, 60, 0.5)' }}>
+                    BÔNUS {bonus.id}
+                  </div>
+                  <h3 className="mt-1 font-black uppercase text-sm">{bonus.title}</h3>
+                  <p className="mt-2 text-xs text-white/70">{bonus.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <a
+              href="#oferta-3990"
+              onClick={scrollToPremiumOffer}
+              className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+                boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+                color: '#000000',
+              }}
+            >
+              Quero explorar a biblioteca ↓
+            </a>
+          </div>
+        </section>
+
+        {/* SECTION: TRANSICAO */}
+        <section id="transicao" className="px-4 py-20 max-w-3xl mx-auto text-center scroll-mt-16 perf-section">
+          <h2 className="text-2xl md:text-4xl font-black uppercase">
+            A CENTRAL PRIME NÃO FOI CRIADA PARA ENCHER SEU HD.
+          </h2>
+          <p className="mt-4 text-3xl md:text-5xl font-black uppercase leading-tight">
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              Foi criada para encher sua fila de ideias.
+            </span>
+          </p>
+
+          <p className="mt-8 text-white/70">Porque arquivo parado em uma pasta não é produto.</p>
+          <p className="mt-4 text-white/70">
+            A ideia é simples: entrar, encontrar um modelo interessante, preparar a impressão e começar um novo teste.
+          </p>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            Ver a Central por dentro ↓
+          </a>
+        </section>
+
+        {/* SECTION: AREA DE MEMBROS VIP */}
+        <section id="area" className="px-4 py-20 max-w-5xl mx-auto text-center scroll-mt-16 perf-section">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider"
+            style={{
+              backgroundColor: 'rgba(255, 0, 60, 0.12)',
+              color: '#ff003c',
+              border: '1.5px solid #ff003c',
+              boxShadow: '0 0 15px rgba(255, 0, 60, 0.35)',
+            }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
+                style={{ backgroundColor: '#ff003c' }}
+              />
+              <span
+                className="relative inline-flex h-2 w-2 rounded-full"
+                style={{ backgroundColor: '#ff003c' }}
+              />
+            </span>
+            💻 ÁREA DE MEMBROS VIP POR DENTRO
+          </div>
+
+          <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+            ENTRE, ESCOLHA UMA CATEGORIA E{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              ENCONTRE SUA PRÓXIMA IDEIA EM POUCOS MINUTOS
+            </span>
+          </h2>
+
+          <p className="mt-4 text-white/70 max-w-2xl mx-auto">
+            Nada de arquivos espalhados e pastas confusas. A Central Prime foi organizada para facilitar sua busca e acelerar seus testes.
+          </p>
+
+          <div
+            className="mt-8 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl"
+            style={{
+              border: '2px solid #ff003c',
+              boxShadow: '0 0 45px rgba(255, 0, 60, 0.45), 0 0 15px rgba(255, 0, 60, 0.3)',
+            }}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/yteFUptSQF0?rel=0"
+              title="Área de Membros VIP"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full border-0"
+            />
+          </div>
+
+          <div className="mt-10 grid md:grid-cols-3 gap-6 text-left">
+            <div
+              className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                border: '1.5px solid #ff003c',
+                boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                backgroundColor: '#1a1c1f',
+              }}
+            >
+              <h4 className="font-black text-sm text-white">📁 ORGANIZAÇÃO POR CATEGORIA</h4>
+              <p className="mt-2 text-sm text-white/70">
+                Encontre rapidamente o tipo de produto que deseja explorar.
+              </p>
+            </div>
+            <div
+              className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                border: '1.5px solid #ff003c',
+                boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                backgroundColor: '#1a1c1f',
+              }}
+            >
+              <h4 className="font-black text-sm text-white">⚡ ACESSO AOS ARQUIVOS</h4>
+              <p className="mt-2 text-sm text-white/70">
+                Localize os modelos sem depender de pesquisas intermináveis em diferentes sites.
+              </p>
+            </div>
+            <div
+              className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                border: '1.5px solid #ff003c',
+                boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                backgroundColor: '#1a1c1f',
+              }}
+            >
+              <h4 className="font-black text-sm text-white">🛡 MODELOS SELECIONADOS</h4>
+              <p className="mt-2 text-sm text-white/70">
+                Tenha novas opções para explorar sem começar cada pesquisa do zero.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <a
+              href="#oferta-3990"
+              onClick={scrollToPremiumOffer}
+              className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+                boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+                color: '#000000',
+              }}
+            >
+              Quero conhecer a Central Prime ↓
+            </a>
+          </div>
+        </section>
+
+        {/* SECTION: DEPOIMENTOS */}
+        <section id="depoimentos" className="px-4 py-20 max-w-6xl mx-auto text-center scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+            VEJA O QUE ACONTECE QUANDO VOCÊ{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              PARA DE PROCURAR E COMEÇA A TESTAR
+            </span>
+          </h2>
+
+          <p className="mt-4 text-white/70 max-w-2xl mx-auto">
+            Confira algumas mensagens de pessoas que entraram na Central Prime e começaram a explorar novos modelos e possibilidades de produto.
+          </p>
+
+          <div className="mt-10">
+            <TestimonialsCarousel images={TESTIMONIALS} />
+          </div>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            Continuar ↓
+          </a>
+        </section>
+
+        {/* SECTION: OBJECÃO */}
+        <section id="objecao" className="px-4 py-20 max-w-3xl mx-auto text-center scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black uppercase">
+            “MAS EU NÃO SEI{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              QUAL PRODUTO ESCOLHER…
+            </span>”
+          </h2>
+
+          <p className="mt-6 text-white/70">
+            E esse é justamente um dos motivos para ter uma biblioteca organizada.
+          </p>
+          <p className="mt-4 text-white/70">
+            Você não precisa acertar “o produto perfeito” de primeira. Você pode:
+          </p>
+
+          <ul className="mt-8 space-y-3 text-left max-w-xl mx-auto">
+            <li className="flex items-start gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span className="text-sm font-bold">explorar diferentes categorias</span>
+            </li>
+            <li className="flex items-start gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span className="text-sm font-bold">escolher modelos que façam sentido para sua estrutura</span>
+            </li>
+            <li className="flex items-start gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span className="text-sm font-bold">produzir pequenas quantidades</span>
+            </li>
+            <li className="flex items-start gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span className="text-sm font-bold">testar novas ideias</span>
+            </li>
+            <li className="flex items-start gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span className="text-sm font-bold">observar a resposta do mercado</span>
+            </li>
+            <li className="flex items-start gap-3 text-white/80">
+              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span className="text-sm font-bold">repetir o que fizer sentido para sua operação</span>
+            </li>
+          </ul>
+
+          <p
+            className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-xl font-black uppercase"
+            style={{
+              border: '1.5px solid #ff003c',
+              backgroundColor: 'rgba(255, 0, 60, 0.1)',
+              boxShadow: '0 0 25px rgba(255, 0, 60, 0.3)',
+            }}
+          >
+            O objetivo não é adivinhar.{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              É ter opções para testar.
+            </span>
+          </p>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            Continuar ↓
+          </a>
+        </section>
+
+        {/* SECTION: PRE-OFERTA */}
+        <section id="pre-oferta" className="px-4 py-20 max-w-3xl mx-auto text-center scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black uppercase">
+            SUA IMPRESSORA JÁ ESTÁ PRONTA. AGORA FALTA DECIDIR{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              O QUE ELA VAI PRODUZIR.
+            </span>
+          </h2>
+
+          <div className="mt-8 space-y-4 text-white/70 max-w-2xl mx-auto">
+            <p>Você já tem a máquina.</p>
+            <p>Já tem o filamento.</p>
+            <p>E provavelmente já percebeu que impressão 3D pode se transformar em produto.</p>
+            <p>O que muitas vezes falta é uma próxima ideia para colocar na mesa de impressão.</p>
+            <p>
+              A Central Prime reúne modelos, categorias e referências em um único ambiente para ajudar você a sair da procura interminável e partir para novos testes.
+            </p>
+          </div>
+
+          <p
+            className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-2xl font-black uppercase"
+            style={{
+              border: '1.5px solid #ff003c',
+              backgroundColor: 'rgba(255, 0, 60, 0.1)',
+              boxShadow: '0 0 25px rgba(255, 0, 60, 0.3)',
+            }}
+          >
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              Escolha. Imprima. Teste. Aprenda. Repita.
+            </span>
+          </p>
+
+          <p className="mt-6 text-white/60 text-sm max-w-2xl mx-auto">
+            É assim que uma impressora deixa de ficar parada esperando uma ideia e começa a fazer parte de uma operação de produtos.
+          </p>
+
+          <a
+            href="#oferta-3990"
+            onClick={scrollToPremiumOffer}
+            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            Quero encontrar meu próximo produto ↓
+          </a>
+        </section>
+
+        {/* SECTION: OFERTA */}
+        <section id="oferta" className="px-4 py-20 max-w-5xl mx-auto scroll-mt-16 perf-section">
+          <h2 className="text-3xl md:text-5xl font-black text-center uppercase">
+            ESCOLHA SEU{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              ACESSO
+            </span>
+          </h2>
+
+          <p className="mt-4 text-center text-white/70">
+            Inicie sua operação de produtos 3D agora mesmo.
+          </p>
+
+          <div className="mt-10 grid md:grid-cols-2 gap-6 items-start">
+            {/* PLANO BASICO */}
+            <div
+              id="plano-basico"
+              className="p-8 rounded-2xl relative scroll-mt-20 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01]"
+              style={{
+                border: '1.5px solid #ff003c',
+                boxShadow: '0 0 20px rgba(255, 0, 60, 0.25)',
+                backgroundColor: '#1a1c1f',
+              }}
+            >
+              <div>
+                <h3 className="font-black text-xl uppercase">CENTRAL 3D BÁSICO</h3>
+                <div className="mt-4 text-3xl font-black">R$ 10,90</div>
+                <ul className="mt-6 space-y-2 text-sm text-white/80">
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-500 font-bold">✓</span> Pack com +150.000 arquivos STL
+                  </li>
+                  <li className="flex items-center gap-2 text-white/60">
+                    <span style={{ color: '#ff003c' }} className="font-bold">✕</span> Sem os demais Bônus
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-500 font-bold">✓</span> Acesso vitalício
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="mt-8 w-full py-3 rounded-full font-bold border border-white/20 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/40 active:scale-95 transition cursor-pointer"
+              >
+                Começar pelo básico
+              </button>
+            </div>
+
+            {/* PLANO COMPLETO PREMIUM */}
+            <div
+              id="oferta-3990"
+              className="p-8 rounded-2xl relative scroll-mt-24 transition-all duration-300 hover:scale-[1.01]"
+              style={{
+                border: '2.5px solid #ff003c',
+                backgroundColor: '#1a1c1f',
+                boxShadow: '0 0 45px rgba(255, 0, 60, 0.55), 0 0 15px rgba(255, 0, 60, 0.3)',
+              }}
+            >
+              <div
+                className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-black text-white"
+                style={{
+                  backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                  boxShadow: '0 0 15px rgba(255, 0, 60, 0.6)',
+                }}
+              >
+                🏆 PLANO COMPLETO • MAIS ESCOLHIDO
+              </div>
+
+              <h3 className="text-center font-black text-xl uppercase mt-2">
+                <span
+                  style={{
+                    backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                  }}
+                >
+                  CENTRAL PRIME 3D™ PREMIUM
+                </span>
+              </h3>
+
+              <p className="mt-2 text-center text-xs font-black uppercase tracking-wider text-white/80">
+                Todos os modelos + todos os bônus
+              </p>
+
+              <img
+                src="https://i.imgur.com/Xt88g6x.png"
+                alt="Central Prime 3D™ Premium"
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                className="mt-4 w-52 max-w-full mx-auto drop-shadow-2xl object-contain"
+              />
+
+              <div className="mt-4 text-center">
+                <div className="text-sm line-through text-white/50">DE R$ 197,00</div>
+                <div className="text-xs text-white/50 uppercase">EM ATÉ 4X NO CARTÃO</div>
+                <div className="mt-2 text-4xl font-black">
+                  <span
+                    style={{
+                      backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                    }}
+                  >
+                    R$ 39,90
+                  </span>
+                </div>
+                <div className="text-xs text-white/70">OU 4X DE R$ 9,97 SEM JUROS</div>
+              </div>
+
+              <ul className="mt-6 space-y-2 text-sm text-white/80">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> +150.000 models 3D organizados
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Categorias para Shopee e Mercado Livre
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 1: Pack de Veículos 3D Profissionais
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 2: Coleção Heróis da Marvel
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 3: Pack de Chaveiros Personalizados
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 4: Modelos Flexíveis e Articulados
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 5: Coleção Clássicos dos Desenhos
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 6: Coleção Máscaras 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 7: Coleção Pokémon 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 8: Coleção 3D de Natal
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 9: Coleção Copa do Mundo
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 10: Mascote Esportivo Exclusivos
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 11: +250 Luminárias STL
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 12: Bichinhos Amigurumi 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 13: Coleção Lego 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 14: Universo Minecraft 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Download imediato
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Garantia de 14 dias
+                </li>
+              </ul>
+
+              <a
+                href={CHECKOUT_URLS.premium}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 block text-center w-full py-4 rounded-full font-black uppercase text-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl"
+                style={{
+                  backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+                  boxShadow: '0 0 35px rgba(0, 255, 102, 0.7), 0 10px 30px rgba(0, 255, 102, 0.4)',
+                  color: '#000000',
+                }}
+              >
+                Quero o plano completo
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION: DUVIDAS FREQUENTES */}
+        <FaqSection />
+
+        {/* SECTION: FINAL CALL TO ACTION */}
+        <section className="px-4 py-20 text-center max-w-3xl mx-auto perf-section">
+          <h2 className="text-3xl md:text-5xl font-black uppercase">
+            PARE DE DEIXAR SUA{' '}
+            <span
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              IMPRESSORA PARADA
+            </span>
+          </h2>
+
+          <p className="mt-6 text-white/70">
+            Acesse a biblioteca minerada da Central Prime 3D™, organize seus produtos e comece a testar vendas na Shopee, Mercado Livre e outros marketplaces.
+          </p>
+
+          <a
+            href={CHECKOUT_URLS.premium}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block mt-8 px-8 py-4 rounded-full font-black text-lg uppercase tracking-wider text-black shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
+              boxShadow: '0 0 45px rgba(0, 255, 102, 0.75), 0 15px 40px rgba(0, 255, 102, 0.4)',
+              color: '#000000',
+            }}
+          >
+            QUERO ACESSAR A CENTRAL AGORA
+          </a>
+
+          <p
+            className="mt-6 text-xs tracking-widest font-bold"
+            style={{ color: '#ff003c', textShadow: '0 0 10px rgba(255, 0, 60, 0.4)' }}
+          >
+            GARANTIA INCONDICIONAL DE 14 DIAS
+          </p>
+        </section>
+
+        {/* FOOTER */}
+        <footer
+          className="px-4 py-10 text-center text-xs text-white/40 border-t"
+          style={{ borderColor: '#ffffff10' }}
+        >
+          © Central Prime 3D™ — Todos os direitos reservados.
+        </footer>
+      </div>
+
+      {/* SPECIAL OFFER MODAL */}
+      <SpecialOfferModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </div>
+  );
+}
