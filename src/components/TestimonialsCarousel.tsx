@@ -154,8 +154,9 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     <img
                       src={imgUrl}
                       alt={`Depoimento ${index + 1}`}
-                      loading="lazy"
+                      loading={index === 0 ? 'eager' : 'lazy'}
                       decoding="async"
+                      fetchPriority={index === 0 ? 'high' : 'auto'}
                       width="391"
                       height="800"
                       referrerPolicy="no-referrer"

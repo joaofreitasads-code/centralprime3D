@@ -87,7 +87,7 @@ export default function App() {
             >
               <video
                 src="https://www.centralprime3d.com.br/assets/0fa52fd653.mp4"
-                poster="https://www.centralprime3d.com.br/assets/68eaec27eb.jpg"
+                poster="/assets/hero_poster.webp"
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls
                 playsInline
@@ -828,7 +828,7 @@ export default function App() {
               </p>
 
               <img
-                src="https://i.imgur.com/Xt88g6x.png"
+                src="/assets/premium_plan.webp"
                 alt="Central Prime 3D™ Premium"
                 loading="lazy"
                 decoding="async"
@@ -948,7 +948,7 @@ export default function App() {
                   style={{ backgroundColor: '#0066ff' }}
                 />
                 <img
-                  src="https://i.imgur.com/LafVg38.png"
+                  src="/assets/garantia-14-dias.webp"
                   alt="Garantia Incondicional de 14 Dias"
                   loading="lazy"
                   decoding="async"

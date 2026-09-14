@@ -105,48 +105,53 @@ export const Carousel: React.FC<CarouselProps> = ({
         onScroll={handleScroll}
         className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 no-scrollbar gpu-layer"
       >
-        {items.map((item, index) => (
-          <div
-            key={`${item.name}-${index}`}
-            className="snap-center flex-shrink-0 w-[70%] sm:w-[45%] md:w-[32%] lg:w-[22%]"
-          >
+        {items.map((item, index) => {
+          const isInitial = index < 3;
+          return (
             <div
-              className="relative rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
-              style={{
-                border: '1.5px solid #0066ff',
-                boxShadow: '0 0 15px rgba(0, 102, 255, 0.25)',
-                backgroundColor: '#1a1c1f',
-              }}
+              key={`${item.name}-${index}`}
+              className="snap-center flex-shrink-0 w-[70%] sm:w-[45%] md:w-[32%] lg:w-[22%]"
+              style={{ contain: 'layout paint' }}
             >
-              <div className="aspect-square overflow-hidden bg-neutral-900">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  loading="lazy"
-                  decoding="async"
-                  width="400"
-                  height="400"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
-              </div>
               <div
-                className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-black shadow-md border"
+                className="relative rounded-2xl overflow-hidden transition-transform duration-200 hover:scale-[1.02]"
                 style={{
-                  backgroundColor: '#000000dd',
-                  color: '#0066ff',
-                  borderColor: '#0066ff80',
-                  boxShadow: '0 0 8px rgba(0, 102, 255, 0.4)',
+                  border: '1.5px solid #0066ff',
+                  boxShadow: '0 0 15px rgba(0, 102, 255, 0.25)',
+                  backgroundColor: '#1a1c1f',
                 }}
               >
-                {item.tag}
-              </div>
-              <div className="p-3 text-center text-sm font-bold tracking-wide text-white uppercase">
-                {item.name}
+                <div className="aspect-square overflow-hidden bg-neutral-900">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    loading={isInitial ? 'eager' : 'lazy'}
+                    decoding="async"
+                    fetchPriority={isInitial ? 'high' : 'auto'}
+                    width="400"
+                    height="400"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-black shadow-md border"
+                  style={{
+                    backgroundColor: '#000000dd',
+                    color: '#0066ff',
+                    borderColor: '#0066ff80',
+                    boxShadow: '0 0 8px rgba(0, 102, 255, 0.4)',
+                  }}
+                >
+                  {item.tag}
+                </div>
+                <div className="p-3 text-center text-sm font-bold tracking-wide text-white uppercase">
+                  {item.name}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Navigation Buttons */}
