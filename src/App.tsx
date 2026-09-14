@@ -505,43 +505,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* SECTION: TRANSICAO */}
-        <section id="transicao" className="px-4 py-20 max-w-3xl mx-auto text-center scroll-mt-16 perf-section">
-          <h2 className="text-2xl md:text-4xl font-black uppercase">
-            A CENTRAL PRIME NÃO FOI CRIADA PARA ENCHER SEU HD.
-          </h2>
-          <p className="mt-3 text-xl sm:text-2xl md:text-3xl font-black uppercase leading-tight">
-            <span
-              style={{
-                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              Foi criada para encher sua fila de ideias.
-            </span>
-          </p>
-
-          <p className="mt-8 text-white/70">Porque arquivo parado em uma pasta não é produto.</p>
-          <p className="mt-4 text-white/70">
-            A ideia é simples: entrar, encontrar um modelo interessante, preparar a impressão e começar um novo teste.
-          </p>
-
-          <a
-            href="#oferta-3990"
-            onClick={scrollToPremiumOffer}
-            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
-            style={{
-              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
-              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
-              color: '#000000',
-            }}
-          >
-            Ver a Central por dentro ↓
-          </a>
-        </section>
-
         {/* SECTION: AREA DE MEMBROS VIP */}
         <section id="area" className="px-4 py-20 max-w-5xl mx-auto text-center scroll-mt-16 perf-section">
           <div
@@ -768,70 +731,6 @@ export default function App() {
             }}
           >
             Continuar ↓
-          </a>
-        </section>
-
-        {/* SECTION: PRE-OFERTA */}
-        <section id="pre-oferta" className="px-4 py-20 max-w-3xl mx-auto text-center scroll-mt-16 perf-section">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase">
-            SUA IMPRESSORA JÁ ESTÁ PRONTA. AGORA FALTA DECIDIR{' '}
-            <span
-              style={{
-                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              O QUE ELA VAI PRODUZIR.
-            </span>
-          </h2>
-
-          <div className="mt-8 space-y-4 text-white/70 max-w-2xl mx-auto">
-            <p>Você já tem a máquina.</p>
-            <p>Já tem o filamento.</p>
-            <p>E provavelmente já percebeu que impressão 3D pode se transformar em produto.</p>
-            <p>O que muitas vezes falta é uma próxima ideia para colocar na mesa de impressão.</p>
-            <p>
-              A Central Prime reúne modelos, categorias e referências em um único ambiente para ajudar você a sair da procura interminável e partir para novos testes.
-            </p>
-          </div>
-
-          <p
-            className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-2xl font-black uppercase"
-            style={{
-              border: '1.5px solid #0066ff',
-              backgroundColor: 'rgba(0, 102, 255, 0.1)',
-              boxShadow: '0 0 25px rgba(0, 102, 255, 0.3)',
-            }}
-          >
-            <span
-              style={{
-                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              Escolha. Imprima. Teste. Aprenda. Repita.
-            </span>
-          </p>
-
-          <p className="mt-6 text-white/60 text-sm max-w-2xl mx-auto">
-            É assim que uma impressora deixa de ficar parada esperando uma ideia e começa a fazer parte de uma operação de produtos.
-          </p>
-
-          <a
-            href="#oferta-3990"
-            onClick={scrollToPremiumOffer}
-            className="inline-block mt-10 px-7 py-3 rounded-full font-black text-sm uppercase tracking-wider text-black hover:scale-105 active:scale-95 transition-all duration-300"
-            style={{
-              backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
-              boxShadow: '0 0 25px rgba(0, 255, 102, 0.7), 0 8px 30px rgba(0, 255, 102, 0.4)',
-              color: '#000000',
-            }}
-          >
-            Quero encontrar meu próximo produto ↓
           </a>
         </section>
 
