@@ -16,7 +16,7 @@ export const FaqSection: React.FC = () => {
         DÚVIDAS{' '}
         <span
           style={{
-            backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+            backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             color: 'transparent',
@@ -34,10 +34,10 @@ export const FaqSection: React.FC = () => {
               key={faq.id}
               className="p-5 rounded-xl cursor-pointer transition-all duration-200"
               style={{
-                border: '1.5px solid #ff003c',
+                border: '1.5px solid #0066ff',
                 boxShadow: isOpen
-                  ? '0 0 20px rgba(255, 0, 60, 0.35)'
-                  : '0 0 10px rgba(255, 0, 60, 0.18)',
+                  ? '0 0 20px rgba(0, 102, 255, 0.35)'
+                  : '0 0 10px rgba(0, 102, 255, 0.18)',
                 backgroundColor: '#1a1c1f',
               }}
               onClick={() => toggleFaq(faq.id)}
@@ -48,7 +48,7 @@ export const FaqSection: React.FC = () => {
                   className={`text-xl transition-transform duration-200 ${
                     isOpen ? 'rotate-180' : ''
                   }`}
-                  style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }}
+                  style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }}
                 >
                   ⌄
                 </span>

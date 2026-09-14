@@ -134,14 +134,14 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
             {/* TELA INTERNA - SEM ESPAÇO SOBRANDO, TOTALMENTE PREENCHIDA */}
             <div
-              className="relative rounded-[32px] sm:rounded-[40px] md:rounded-[46px] overflow-hidden bg-black flex flex-col justify-center cursor-grab active:cursor-grabbing border border-neutral-200"
+              className="relative rounded-[32px] sm:rounded-[40px] md:rounded-[46px] overflow-hidden bg-black flex flex-col justify-center cursor-grab active:cursor-grabbing border border-neutral-200 aspect-[391/800]"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
               {/* Slides dos depoimentos - Preenchimento total */}
               <div
-                className="flex transition-transform duration-500 ease-out w-full"
+                className="flex transition-transform duration-500 ease-out w-full h-full"
                 style={{
                   transform: `translateX(-${currentIndex * 100}%)`,
                 }}
@@ -149,15 +149,17 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                 {images.map((imgUrl, index) => (
                   <div
                     key={index}
-                    className="w-full flex-shrink-0 flex items-center justify-center p-0 m-0 bg-black"
+                    className="w-full h-full flex-shrink-0 flex items-center justify-center p-0 m-0 bg-black"
                   >
                     <img
                       src={imgUrl}
                       alt={`Depoimento ${index + 1}`}
                       loading="lazy"
                       decoding="async"
+                      width="391"
+                      height="800"
                       referrerPolicy="no-referrer"
-                      className="w-full h-auto block object-cover select-none"
+                      className="w-full h-full block object-cover select-none"
                     />
                   </div>
                 ))}

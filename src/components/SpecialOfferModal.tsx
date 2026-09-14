@@ -39,9 +39,9 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             transition={{ duration: 0.2 }}
             className="relative w-full max-w-md rounded-2xl p-8 shadow-2xl"
             style={{
-              border: '2px solid #ff003c',
-              boxShadow: '0 0 50px rgba(255, 0, 60, 0.5), 0 0 20px rgba(255, 0, 60, 0.3)',
-              background: 'linear-gradient(180deg, #1a1c1f, rgba(255, 0, 60, 0.15))',
+              border: '2px solid #0066ff',
+              boxShadow: '0 0 50px rgba(0, 102, 255, 0.5), 0 0 20px rgba(0, 102, 255, 0.3)',
+              background: 'linear-gradient(180deg, #1a1c1f, rgba(0, 102, 255, 0.15))',
             }}
           >
             <button
@@ -58,7 +58,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
               ESPERA!{' '}
               <span
                 style={{
-                  backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                  backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   color: 'transparent',
@@ -77,7 +77,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
               <div className="mt-1 text-5xl font-black">
                 <span
                   style={{
-                    backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                    backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
                     color: 'transparent',
@@ -91,13 +91,13 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
 
             <ul className="mt-6 space-y-1 text-sm text-white/80">
               <li className="flex items-center gap-2">
-                <span style={{ color: '#ff003c' }} className="font-bold">✓</span> +150.000 modelos STL
+                <span style={{ color: '#0066ff' }} className="font-bold">✓</span> +150.000 modelos STL
               </li>
               <li className="flex items-center gap-2">
-                <span style={{ color: '#ff003c' }} className="font-bold">✓</span> Todos os 14 bônus inclusos
+                <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os 14 bônus inclusos
               </li>
               <li className="flex items-center gap-2">
-                <span style={{ color: '#ff003c' }} className="font-bold">✓</span> Garantia de 14 dias
+                <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Garantia de 14 dias
               </li>
             </ul>
 
@@ -120,7 +120,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 className="block text-center w-full py-3 rounded-full font-bold text-white uppercase text-xs tracking-wide hover:brightness-110 active:scale-95 transition"
-                style={{ backgroundColor: '#ff003c', boxShadow: '0 8px 25px -5px rgba(255, 0, 60, 0.5)' }}
+                style={{ backgroundColor: '#0066ff', boxShadow: '0 8px 25px -5px rgba(0, 102, 255, 0.5)' }}
               >
                 NÃO, PREFIRO O BÁSICO
               </a>

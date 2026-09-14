@@ -9,6 +9,7 @@ export interface BonusItem {
   title: string;
   desc: string;
   img: string;
+  imgClass?: string;
 }
 
 export interface FaqItem {
@@ -133,7 +134,8 @@ export const BONUSES: BonusItem[] = [
     id: 11,
     title: '+250 LUMINÁRIAS STL',
     desc: 'Peças decorativas com luz. Categoria de decoração para quem quer testar produtos de apresentação mais elaborada.',
-    img: 'https://i.imgur.com/vhsRFIE.png',
+    img: 'https://i.imgur.com/wAkdf9P.png',
+    imgClass: 'object-contain object-center p-1',
   },
   {
     id: 12,

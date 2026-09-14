@@ -37,8 +37,8 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
             <div
               className="relative rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] flex flex-col h-full"
               style={{
-                border: '1.5px solid #ff003c',
-                boxShadow: '0 0 15px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 15px rgba(0, 102, 255, 0.25)',
                 backgroundColor: '#1a1c1f',
               }}
             >
@@ -49,6 +49,8 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
                   alt={item.name}
                   loading="lazy"
                   decoding="async"
+                  width="280"
+                  height="280"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center block"
                 />

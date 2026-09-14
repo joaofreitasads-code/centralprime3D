@@ -17,11 +17,34 @@
     <link rel="preconnect" href="https://i.imgur.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.centralprime3d.com.br" />
     <link rel="preconnect" href="https://www.centralprime3d.com.br" crossorigin />
+    <link rel="dns-prefetch" href="https://img.youtube.com" />
+    <link rel="preconnect" href="https://img.youtube.com" crossorigin />
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
 
     <!-- Preload critical above-the-fold hero poster -->
     <link rel="preload" as="image" href="https://www.centralprime3d.com.br/assets/68eaec27eb.jpg" fetchpriority="high" />
+
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1368569075303614');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
   </head>
-  <body class="bg-black text-white selection:bg-[#ff003c] selection:text-white">
+  <body class="bg-black text-white selection:bg-[#0066ff] selection:text-white">
+    <!-- Meta Pixel noscript Fallback -->
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=1368569075303614&ev=PageView&noscript=1" alt="" />
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

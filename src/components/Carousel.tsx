@@ -113,8 +113,8 @@ export const Carousel: React.FC<CarouselProps> = ({
             <div
               className="relative rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
               style={{
-                border: '1.5px solid #ff003c',
-                boxShadow: '0 0 15px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 15px rgba(0, 102, 255, 0.25)',
                 backgroundColor: '#1a1c1f',
               }}
             >
@@ -124,6 +124,8 @@ export const Carousel: React.FC<CarouselProps> = ({
                   alt={item.name}
                   loading="lazy"
                   decoding="async"
+                  width="400"
+                  height="400"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
@@ -132,9 +134,9 @@ export const Carousel: React.FC<CarouselProps> = ({
                 className="absolute top-3 left-3 px-2.5 py-1 rounded-md text-[10px] font-black shadow-md border"
                 style={{
                   backgroundColor: '#000000dd',
-                  color: '#ff003c',
-                  borderColor: '#ff003c80',
-                  boxShadow: '0 0 8px rgba(255, 0, 60, 0.4)',
+                  color: '#0066ff',
+                  borderColor: '#0066ff80',
+                  boxShadow: '0 0 8px rgba(0, 102, 255, 0.4)',
                 }}
               >
                 {item.tag}
@@ -155,8 +157,8 @@ export const Carousel: React.FC<CarouselProps> = ({
         className="absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center text-white text-xl font-black backdrop-blur hover:scale-110 active:scale-95 transition cursor-pointer select-none"
         style={{
           backgroundColor: '#000000aa',
-          border: '1.5px solid #ff003c',
-          boxShadow: '0 0 12px rgba(255, 0, 60, 0.4)',
+          border: '1.5px solid #0066ff',
+          boxShadow: '0 0 12px rgba(0, 102, 255, 0.4)',
         }}
       >
         ‹
@@ -168,8 +170,8 @@ export const Carousel: React.FC<CarouselProps> = ({
         className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center text-white text-xl font-black backdrop-blur hover:scale-110 active:scale-95 transition cursor-pointer select-none"
         style={{
           backgroundColor: '#000000aa',
-          border: '1.5px solid #ff003c',
-          boxShadow: '0 0 12px rgba(255, 0, 60, 0.4)',
+          border: '1.5px solid #0066ff',
+          boxShadow: '0 0 12px rgba(0, 102, 255, 0.4)',
         }}
       >
         ›
@@ -188,8 +190,8 @@ export const Carousel: React.FC<CarouselProps> = ({
               className="h-1.5 rounded-full transition-all duration-300 cursor-pointer"
               style={{
                 width: isActive ? '24px' : '8px',
-                backgroundColor: isActive ? '#ff003c' : 'rgba(255, 255, 255, 0.2)',
-                boxShadow: isActive ? '0 0 8px #ff003c' : 'none',
+                backgroundColor: isActive ? '#0066ff' : 'rgba(255, 255, 255, 0.2)',
+                boxShadow: isActive ? '0 0 8px #0066ff' : 'none',
               }}
             />
           );

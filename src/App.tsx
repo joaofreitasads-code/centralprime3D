@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import {
   SELECTED_MODELS,
   SELECTED_MODELS_ROW2,
@@ -12,7 +12,12 @@ import { Carousel } from './components/Carousel';
 import { InfiniteMarquee } from './components/InfiniteMarquee';
 import { TestimonialsCarousel } from './components/TestimonialsCarousel';
 import { FaqSection } from './components/FaqSection';
-import { SpecialOfferModal } from './components/SpecialOfferModal';
+import { YouTubeFacade } from './components/YouTubeFacade';
+
+// Lazy-load modal to avoid loading motion library on initial page render
+const SpecialOfferModal = React.lazy(() =>
+  import('./components/SpecialOfferModal').then((m) => ({ default: m.SpecialOfferModal }))
+);
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,52 +38,51 @@ export default function App() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider"
             style={{
-              backgroundColor: 'rgba(255, 0, 60, 0.12)',
-              color: '#ff003c',
-              border: '1.5px solid #ff003c',
-              boxShadow: '0 0 15px rgba(255, 0, 60, 0.35)',
+              backgroundColor: 'rgba(0, 102, 255, 0.12)',
+              color: '#0066ff',
+              border: '1.5px solid #0066ff',
+              boxShadow: '0 0 15px rgba(0, 102, 255, 0.35)',
             }}
           >
             <span className="relative flex h-2 w-2">
               <span
                 className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
-                style={{ backgroundColor: '#ff003c' }}
+                style={{ backgroundColor: '#0066ff' }}
               />
               <span
                 className="relative inline-flex h-2 w-2 rounded-full"
-                style={{ backgroundColor: '#ff003c' }}
+                style={{ backgroundColor: '#0066ff' }}
               />
             </span>
             PARA QUEM TEM IMPRESSORA 3D E QUER TRANSFORMAR ARQUIVOS EM PRODUTOS
           </div>
 
-          <h1 className="mt-8 text-4xl md:text-6xl font-black leading-[1.1] max-w-4xl mx-auto uppercase tracking-tight">
-            Pare de{' '}
+          <h1 className="mt-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black leading-tight max-w-3xl mx-auto uppercase tracking-tight">
+            VOCÊ NÃO COMPROU UMA IMPRESSORA 3D PARA DEIXÁ-LA PARADA.{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
               }}
             >
-              escolher no achismo
-            </span>{' '}
-            o que colocar na sua impressora 3D
+              DESCUBRA NOVAS IDEIAS DE PRODUTOS PARA IMPRIMIR E VENDER.
+            </span>
           </h1>
 
           {/* Hero Video */}
           <div className="mt-10 mx-auto w-full max-w-[360px] relative">
             <div
               className="absolute -inset-10 blur-3xl opacity-50"
-              style={{ background: 'radial-gradient(circle at 50% 50%, #ff003c, transparent 70%)' }}
+              style={{ background: 'radial-gradient(circle at 50% 50%, #0066ff, transparent 70%)' }}
             />
             <div
               className="relative rounded-3xl overflow-hidden"
               style={{
                 aspectRatio: '9 / 16',
-                border: '2px solid #ff003c',
-                boxShadow: '0 0 45px rgba(255, 0, 60, 0.5), 0 0 15px rgba(255, 0, 60, 0.3)',
+                border: '2px solid #0066ff',
+                boxShadow: '0 0 45px rgba(0, 102, 255, 0.5), 0 0 15px rgba(0, 102, 255, 0.3)',
               }}
             >
               <video
@@ -101,7 +105,7 @@ export default function App() {
 
           <p
             className="mt-5 text-sm md:text-base font-black uppercase tracking-wide max-w-xl mx-auto"
-            style={{ color: '#ff003c', textShadow: '0 0 10px rgba(255, 0, 60, 0.4)' }}
+            style={{ color: '#0066ff', textShadow: '0 0 10px rgba(0, 102, 255, 0.4)' }}
           >
             Menos tempo procurando STL. Mais tempo testando produtos.
           </p>
@@ -110,9 +114,9 @@ export default function App() {
             <li
               className="px-4 py-2 rounded-full"
               style={{
-                border: '1.5px solid #ff003c',
-                backgroundColor: 'rgba(255, 0, 60, 0.1)',
-                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                boxShadow: '0 0 12px rgba(0, 102, 255, 0.25)',
               }}
             >
               ✓ Modelos selecionados
@@ -120,9 +124,9 @@ export default function App() {
             <li
               className="px-4 py-2 rounded-full"
               style={{
-                border: '1.5px solid #ff003c',
-                backgroundColor: 'rgba(255, 0, 60, 0.1)',
-                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                boxShadow: '0 0 12px rgba(0, 102, 255, 0.25)',
               }}
             >
               ✓ Diversas categorias para explorar
@@ -130,9 +134,9 @@ export default function App() {
             <li
               className="px-4 py-2 rounded-full"
               style={{
-                border: '1.5px solid #ff003c',
-                backgroundColor: 'rgba(255, 0, 60, 0.1)',
-                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                boxShadow: '0 0 12px rgba(0, 102, 255, 0.25)',
               }}
             >
               ✓ Biblioteca organizada
@@ -140,9 +144,9 @@ export default function App() {
             <li
               className="px-4 py-2 rounded-full"
               style={{
-                border: '1.5px solid #ff003c',
-                backgroundColor: 'rgba(255, 0, 60, 0.1)',
-                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                boxShadow: '0 0 12px rgba(0, 102, 255, 0.25)',
               }}
             >
               ✓ Novas ideias de produtos
@@ -150,9 +154,9 @@ export default function App() {
             <li
               className="px-4 py-2 rounded-full"
               style={{
-                border: '1.5px solid #ff003c',
-                backgroundColor: 'rgba(255, 0, 60, 0.1)',
-                boxShadow: '0 0 12px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                boxShadow: '0 0 12px rgba(0, 102, 255, 0.25)',
               }}
             >
               ✓ Acesso rápido aos arquivos
@@ -179,11 +183,11 @@ export default function App() {
 
         {/* SECTION: PRODUTOS / MODELOS SELECIONADOS */}
         <section id="produtos" className="px-4 py-20 max-w-7xl mx-auto scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black text-center uppercase">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center uppercase">
             COMECE COM{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -227,11 +231,11 @@ export default function App() {
 
         {/* SECTION: O PROBLEMA */}
         <section id="problema" className="px-4 py-20 max-w-4xl mx-auto text-center scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase max-w-3xl mx-auto">
             O PROBLEMA NÃO É TER POUCOS ARQUIVOS. É{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -247,23 +251,23 @@ export default function App() {
 
           <ul className="mt-8 space-y-3 text-left max-w-xl mx-auto">
             <li className="flex items-center gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="text-xl font-bold">✕</span>
               <span className="font-bold text-sm">CENTENAS DE STL SALVOS NO COMPUTADOR</span>
             </li>
             <li className="flex items-center gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="text-xl font-bold">✕</span>
               <span className="font-bold text-sm">HORAS PROCURANDO ARQUIVOS</span>
             </li>
             <li className="flex items-center gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="text-xl font-bold">✕</span>
               <span className="font-bold text-sm">MODELOS QUE NUNCA SAEM DA PASTA</span>
             </li>
             <li className="flex items-center gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="text-xl font-bold">✕</span>
               <span className="font-bold text-sm">FILAMENTO GASTO EM PRODUTOS ESCOLHIDOS SEM DIREÇÃO</span>
             </li>
             <li className="flex items-center gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="text-xl font-bold">✕</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="text-xl font-bold">✕</span>
               <span className="font-bold text-sm">DIFICULDADE PARA DECIDIR O PRÓXIMO ITEM DO CATÁLOGO</span>
             </li>
           </ul>
@@ -278,15 +282,15 @@ export default function App() {
           <p
             className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-xl font-black uppercase"
             style={{
-              border: '1.5px solid #ff003c',
-              backgroundColor: 'rgba(255, 0, 60, 0.1)',
-              boxShadow: '0 0 25px rgba(255, 0, 60, 0.3)',
+              border: '1.5px solid #0066ff',
+              backgroundColor: 'rgba(0, 102, 255, 0.1)',
+              boxShadow: '0 0 25px rgba(0, 102, 255, 0.3)',
             }}
           >
             Mais arquivos não resolvem o problema.{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -312,11 +316,11 @@ export default function App() {
 
         {/* SECTION: CATEGORIAS / NICHOS */}
         <section id="categorias" className="px-4 py-20 max-w-7xl mx-auto scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black text-center uppercase">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center uppercase">
             EXPLORE DIFERENTES NICHOS{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -352,11 +356,11 @@ export default function App() {
 
         {/* SECTION: PROVAS / MARKET REFERENCIA */}
         <section id="provas" className="px-4 py-20 max-w-6xl mx-auto text-center scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase max-w-3xl mx-auto">
             ANTES DE IMPRIMIR, VEJA O QUE{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -381,11 +385,13 @@ export default function App() {
                 alt={`Prova de venda ${idx + 1}`}
                 loading="lazy"
                 decoding="async"
+                width="1163"
+                height="667"
                 referrerPolicy="no-referrer"
                 className="w-full rounded-xl shadow-xl transition-transform hover:scale-[1.01]"
                 style={{
-                  border: '1.5px solid #ff003c',
-                  boxShadow: '0 0 20px rgba(255, 0, 60, 0.25)',
+                  border: '1.5px solid #0066ff',
+                  boxShadow: '0 0 20px rgba(0, 102, 255, 0.25)',
                 }}
               />
             ))}
@@ -393,7 +399,7 @@ export default function App() {
 
           <p
             className="mt-8 text-lg font-black uppercase tracking-wide"
-            style={{ color: '#ff003c', textShadow: '0 0 10px rgba(255, 0, 60, 0.4)' }}
+            style={{ color: '#0066ff', textShadow: '0 0 10px rgba(0, 102, 255, 0.4)' }}
           >
             Observe. Escolha. Produza. Teste.
           </p>
@@ -417,22 +423,38 @@ export default function App() {
 
         {/* SECTION: BONUS */}
         <section id="bonus" className="px-4 py-20 max-w-6xl mx-auto scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black text-center uppercase max-w-4xl mx-auto">
+          {/* Badge highlighting inclusion in Premium */}
+          <div className="flex justify-center mb-4">
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black tracking-wider uppercase"
+              style={{
+                backgroundColor: 'rgba(0, 102, 255, 0.15)',
+                color: '#00d4ff',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 15px rgba(0, 102, 255, 0.35)',
+              }}
+            >
+              <span className="w-2 h-2 rounded-full bg-[#00d4ff] animate-pulse" />
+              BÔNUS INCLUSOS NO ACESSO PREMIUM
+            </div>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center uppercase max-w-4xl mx-auto">
             UMA ÚNICA IDEIA PODE VIRAR SEU PRÓXIMO PRODUTO.{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
               }}
             >
-              AQUI VOCÊ TEM MUITAS PARA EXPLORAR.
+              TODOS ESTES BÔNUS ESTÃO LIBERADOS NO ACESSO PREMIUM.
             </span>
           </h2>
 
-          <p className="mt-4 text-center text-white/70 max-w-2xl mx-auto">
-            A Central Prime reúne diferentes categorias em um único lugar para você não depender de uma única linha de produtos.
+          <p className="mt-4 text-center text-white/80 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
+            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os 14 bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
           </p>
 
           <div className="mt-12 grid md:grid-cols-2 gap-6">
@@ -441,8 +463,8 @@ export default function App() {
                 key={bonus.id}
                 className="rounded-2xl overflow-hidden p-4 flex gap-4 items-center transition-all duration-300 hover:scale-[1.02]"
                 style={{
-                  border: '1.5px solid #ff003c',
-                  boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                  border: '1.5px solid #0066ff',
+                  boxShadow: '0 0 15px rgba(0, 102, 255, 0.2)',
                   backgroundColor: '#1a1c1f',
                 }}
               >
@@ -451,11 +473,13 @@ export default function App() {
                   alt={bonus.title}
                   loading="lazy"
                   decoding="async"
+                  width="112"
+                  height="112"
                   referrerPolicy="no-referrer"
-                  className="w-28 h-28 object-cover rounded-xl flex-shrink-0 bg-neutral-900 border border-[#ff003c55]"
+                  className={`w-28 h-28 ${bonus.imgClass || 'object-cover object-center'} rounded-xl flex-shrink-0 bg-neutral-900 border border-[#0066ff55]`}
                 />
                 <div>
-                  <div className="text-xs font-bold" style={{ color: '#ff003c', textShadow: '0 0 6px rgba(255, 0, 60, 0.5)' }}>
+                  <div className="text-xs font-bold" style={{ color: '#0066ff', textShadow: '0 0 6px rgba(0, 102, 255, 0.5)' }}>
                     BÔNUS {bonus.id}
                   </div>
                   <h3 className="mt-1 font-black uppercase text-sm">{bonus.title}</h3>
@@ -476,7 +500,7 @@ export default function App() {
                 color: '#000000',
               }}
             >
-              Quero explorar a biblioteca ↓
+              Quero o Acesso Premium com Todos os Bônus ↓
             </a>
           </div>
         </section>
@@ -486,10 +510,10 @@ export default function App() {
           <h2 className="text-2xl md:text-4xl font-black uppercase">
             A CENTRAL PRIME NÃO FOI CRIADA PARA ENCHER SEU HD.
           </h2>
-          <p className="mt-4 text-3xl md:text-5xl font-black uppercase leading-tight">
+          <p className="mt-3 text-xl sm:text-2xl md:text-3xl font-black uppercase leading-tight">
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -523,30 +547,30 @@ export default function App() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider"
             style={{
-              backgroundColor: 'rgba(255, 0, 60, 0.12)',
-              color: '#ff003c',
-              border: '1.5px solid #ff003c',
-              boxShadow: '0 0 15px rgba(255, 0, 60, 0.35)',
+              backgroundColor: 'rgba(0, 102, 255, 0.12)',
+              color: '#0066ff',
+              border: '1.5px solid #0066ff',
+              boxShadow: '0 0 15px rgba(0, 102, 255, 0.35)',
             }}
           >
             <span className="relative flex h-2 w-2">
               <span
                 className="absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping"
-                style={{ backgroundColor: '#ff003c' }}
+                style={{ backgroundColor: '#0066ff' }}
               />
               <span
                 className="relative inline-flex h-2 w-2 rounded-full"
-                style={{ backgroundColor: '#ff003c' }}
+                style={{ backgroundColor: '#0066ff' }}
               />
             </span>
             💻 ÁREA DE MEMBROS VIP POR DENTRO
           </div>
 
-          <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+          <h2 className="mt-6 text-2xl sm:text-3xl md:text-4xl font-black uppercase max-w-3xl mx-auto">
             ENTRE, ESCOLHA UMA CATEGORIA E{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -560,29 +584,18 @@ export default function App() {
             Nada de arquivos espalhados e pastas confusas. A Central Prime foi organizada para facilitar sua busca e acelerar seus testes.
           </p>
 
-          <div
-            className="mt-8 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl"
-            style={{
-              border: '2px solid #ff003c',
-              boxShadow: '0 0 45px rgba(255, 0, 60, 0.45), 0 0 15px rgba(255, 0, 60, 0.3)',
-            }}
-          >
-            <iframe
-              src="https://www.youtube.com/embed/yteFUptSQF0?rel=0"
-              title="Área de Membros VIP"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full border-0"
-            />
-          </div>
+          {/* YouTube Video Tour via Ultra-Fast Facade */}
+          <YouTubeFacade
+            videoId="yteFUptSQF0"
+            title="Área de Membros VIP — Central Prime 3D"
+          />
 
           <div className="mt-10 grid md:grid-cols-3 gap-6 text-left">
             <div
               className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
               style={{
-                border: '1.5px solid #ff003c',
-                boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 15px rgba(0, 102, 255, 0.2)',
                 backgroundColor: '#1a1c1f',
               }}
             >
@@ -594,8 +607,8 @@ export default function App() {
             <div
               className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
               style={{
-                border: '1.5px solid #ff003c',
-                boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 15px rgba(0, 102, 255, 0.2)',
                 backgroundColor: '#1a1c1f',
               }}
             >
@@ -607,8 +620,8 @@ export default function App() {
             <div
               className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
               style={{
-                border: '1.5px solid #ff003c',
-                boxShadow: '0 0 15px rgba(255, 0, 60, 0.2)',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 15px rgba(0, 102, 255, 0.2)',
                 backgroundColor: '#1a1c1f',
               }}
             >
@@ -637,11 +650,11 @@ export default function App() {
 
         {/* SECTION: DEPOIMENTOS */}
         <section id="depoimentos" className="px-4 py-20 max-w-6xl mx-auto text-center scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black uppercase max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase max-w-3xl mx-auto">
             VEJA O QUE ACONTECE QUANDO VOCÊ{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -679,7 +692,7 @@ export default function App() {
             “MAS EU NÃO SEI{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -698,27 +711,27 @@ export default function App() {
 
           <ul className="mt-8 space-y-3 text-left max-w-xl mx-auto">
             <li className="flex items-start gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="font-black">✓</span>
               <span className="text-sm font-bold">explorar diferentes categorias</span>
             </li>
             <li className="flex items-start gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="font-black">✓</span>
               <span className="text-sm font-bold">escolher modelos que façam sentido para sua estrutura</span>
             </li>
             <li className="flex items-start gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="font-black">✓</span>
               <span className="text-sm font-bold">produzir pequenas quantidades</span>
             </li>
             <li className="flex items-start gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="font-black">✓</span>
               <span className="text-sm font-bold">testar novas ideias</span>
             </li>
             <li className="flex items-start gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="font-black">✓</span>
               <span className="text-sm font-bold">observar a resposta do mercado</span>
             </li>
             <li className="flex items-start gap-3 text-white/80">
-              <span style={{ color: '#ff003c', textShadow: '0 0 8px #ff003c' }} className="font-black">✓</span>
+              <span style={{ color: '#0066ff', textShadow: '0 0 8px #0066ff' }} className="font-black">✓</span>
               <span className="text-sm font-bold">repetir o que fizer sentido para sua operação</span>
             </li>
           </ul>
@@ -726,15 +739,15 @@ export default function App() {
           <p
             className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-xl font-black uppercase"
             style={{
-              border: '1.5px solid #ff003c',
-              backgroundColor: 'rgba(255, 0, 60, 0.1)',
-              boxShadow: '0 0 25px rgba(255, 0, 60, 0.3)',
+              border: '1.5px solid #0066ff',
+              backgroundColor: 'rgba(0, 102, 255, 0.1)',
+              boxShadow: '0 0 25px rgba(0, 102, 255, 0.3)',
             }}
           >
             O objetivo não é adivinhar.{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -760,11 +773,11 @@ export default function App() {
 
         {/* SECTION: PRE-OFERTA */}
         <section id="pre-oferta" className="px-4 py-20 max-w-3xl mx-auto text-center scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black uppercase">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase">
             SUA IMPRESSORA JÁ ESTÁ PRONTA. AGORA FALTA DECIDIR{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -787,14 +800,14 @@ export default function App() {
           <p
             className="mt-10 mx-auto max-w-2xl p-6 rounded-2xl text-lg md:text-2xl font-black uppercase"
             style={{
-              border: '1.5px solid #ff003c',
-              backgroundColor: 'rgba(255, 0, 60, 0.1)',
-              boxShadow: '0 0 25px rgba(255, 0, 60, 0.3)',
+              border: '1.5px solid #0066ff',
+              backgroundColor: 'rgba(0, 102, 255, 0.1)',
+              boxShadow: '0 0 25px rgba(0, 102, 255, 0.3)',
             }}
           >
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -828,7 +841,7 @@ export default function App() {
             ESCOLHA SEU{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -848,8 +861,8 @@ export default function App() {
               id="plano-basico"
               className="p-8 rounded-2xl relative scroll-mt-20 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01]"
               style={{
-                border: '1.5px solid #ff003c',
-                boxShadow: '0 0 20px rgba(255, 0, 60, 0.25)',
+                border: '1.5px solid #0066ff',
+                boxShadow: '0 0 20px rgba(0, 102, 255, 0.25)',
                 backgroundColor: '#1a1c1f',
               }}
             >
@@ -861,7 +874,7 @@ export default function App() {
                     <span className="text-green-500 font-bold">✓</span> Pack com +150.000 arquivos STL
                   </li>
                   <li className="flex items-center gap-2 text-white/60">
-                    <span style={{ color: '#ff003c' }} className="font-bold">✕</span> Sem os demais Bônus
+                    <span style={{ color: '#0066ff' }} className="font-bold">✕</span> Sem os demais Bônus
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-green-500 font-bold">✓</span> Acesso vitalício
@@ -883,16 +896,16 @@ export default function App() {
               id="oferta-3990"
               className="p-8 rounded-2xl relative scroll-mt-24 transition-all duration-300 hover:scale-[1.01]"
               style={{
-                border: '2.5px solid #ff003c',
+                border: '2.5px solid #0066ff',
                 backgroundColor: '#1a1c1f',
-                boxShadow: '0 0 45px rgba(255, 0, 60, 0.55), 0 0 15px rgba(255, 0, 60, 0.3)',
+                boxShadow: '0 0 45px rgba(0, 102, 255, 0.55), 0 0 15px rgba(0, 102, 255, 0.3)',
               }}
             >
               <div
                 className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-black text-white"
                 style={{
-                  backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
-                  boxShadow: '0 0 15px rgba(255, 0, 60, 0.6)',
+                  backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
+                  boxShadow: '0 0 15px rgba(0, 102, 255, 0.6)',
                 }}
               >
                 🏆 PLANO COMPLETO • MAIS ESCOLHIDO
@@ -901,7 +914,7 @@ export default function App() {
               <h3 className="text-center font-black text-xl uppercase mt-2">
                 <span
                   style={{
-                    backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                    backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
                     color: 'transparent',
@@ -920,6 +933,8 @@ export default function App() {
                 alt="Central Prime 3D™ Premium"
                 loading="lazy"
                 decoding="async"
+                width="208"
+                height="208"
                 referrerPolicy="no-referrer"
                 className="mt-4 w-52 max-w-full mx-auto drop-shadow-2xl object-contain"
               />
@@ -930,7 +945,7 @@ export default function App() {
                 <div className="mt-2 text-4xl font-black">
                   <span
                     style={{
-                      backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                      backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                       WebkitBackgroundClip: 'text',
                       backgroundClip: 'text',
                       color: 'transparent',
@@ -1016,16 +1031,96 @@ export default function App() {
           </div>
         </section>
 
+        {/* SECTION: GARANTIA DE 14 DIAS */}
+        <section id="garantia" className="px-4 py-16 sm:py-20 max-w-4xl mx-auto scroll-mt-16 perf-section">
+          <div
+            className="p-6 sm:p-10 md:p-12 rounded-3xl relative overflow-hidden"
+            style={{
+              border: '1.5px solid #0066ff',
+              boxShadow: '0 0 35px rgba(0, 102, 255, 0.25)',
+              backgroundColor: '#1a1c1f',
+            }}
+          >
+            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-10">
+              {/* Imagem do Selo de 14 Dias */}
+              <div className="flex-shrink-0 relative flex items-center justify-center">
+                <div
+                  className="absolute inset-0 rounded-full blur-2xl opacity-40"
+                  style={{ backgroundColor: '#0066ff' }}
+                />
+                <img
+                  src="https://i.imgur.com/LafVg38.png"
+                  alt="Garantia Incondicional de 14 Dias"
+                  loading="lazy"
+                  decoding="async"
+                  width="280"
+                  height="280"
+                  referrerPolicy="no-referrer"
+                  className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain drop-shadow-[0_0_25px_rgba(0,102,255,0.4)]"
+                />
+              </div>
+
+              {/* Textos da Garantia */}
+              <div className="text-center md:text-left flex-1">
+                <div
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black tracking-wider uppercase mb-4"
+                  style={{
+                    backgroundColor: 'rgba(0, 102, 255, 0.15)',
+                    color: '#00d4ff',
+                    border: '1px solid #0066ff80',
+                  }}
+                >
+                  🛡️ RISCO ZERO PARA VOCÊ
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl font-black uppercase text-white leading-tight">
+                  GARANTIA INCONDICIONAL DE{' '}
+                  <span
+                    style={{
+                      backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                    }}
+                  >
+                    14 DIAS
+                  </span>
+                </h2>
+
+                <p className="mt-4 text-sm sm:text-base text-white/80 leading-relaxed">
+                  Você tem <strong>14 dias completos</strong> para acessar a Central Prime 3D™, explorar todas as categorias, baixar os arquivos STL e testar os modelos na sua impressora.
+                </p>
+
+                <p className="mt-3 text-sm sm:text-base text-white/70 leading-relaxed">
+                  Se por qualquer motivo você achar que o conteúdo não é para você, basta solicitar o reembolso na plataforma que devolvemos <strong>100% do seu investimento</strong>, sem complicações e sem burocracia.
+                </p>
+
+                <div className="mt-6 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-6 text-xs text-white/70 font-bold uppercase tracking-wide">
+                  <span className="flex items-center gap-1.5 text-[#00ff66]">
+                    ✓ Teste sem riscos
+                  </span>
+                  <span className="flex items-center gap-1.5 text-[#00ff66]">
+                    ✓ Reembolso simplificado
+                  </span>
+                  <span className="flex items-center gap-1.5 text-[#00ff66]">
+                    ✓ Suporte dedicado
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SECTION: DUVIDAS FREQUENTES */}
         <FaqSection />
 
         {/* SECTION: FINAL CALL TO ACTION */}
         <section className="px-4 py-20 text-center max-w-3xl mx-auto perf-section">
-          <h2 className="text-3xl md:text-5xl font-black uppercase">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase">
             PARE DE DEIXAR SUA{' '}
             <span
               style={{
-                backgroundImage: 'linear-gradient(135deg, #ff003c, #ff3366)',
+                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
@@ -1055,7 +1150,7 @@ export default function App() {
 
           <p
             className="mt-6 text-xs tracking-widest font-bold"
-            style={{ color: '#ff003c', textShadow: '0 0 10px rgba(255, 0, 60, 0.4)' }}
+            style={{ color: '#0066ff', textShadow: '0 0 10px rgba(0, 102, 255, 0.4)' }}
           >
             GARANTIA INCONDICIONAL DE 14 DIAS
           </p>
@@ -1070,11 +1165,15 @@ export default function App() {
         </footer>
       </div>
 
-      {/* SPECIAL OFFER MODAL */}
-      <SpecialOfferModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      {/* SPECIAL OFFER MODAL (LOADED ONLY WHEN REQUESTED) */}
+      {isModalOpen && (
+        <Suspense fallback={null}>
+          <SpecialOfferModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
