@@ -73,7 +73,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             </p>
 
             <div className="mt-6 text-center">
-              <div className="text-sm line-through text-white/50">DE R$ 39,90</div>
+              <div className="text-sm line-through text-white/50">DE R$ 47,90</div>
               <div className="mt-1 text-5xl font-black">
                 <span
                   style={{

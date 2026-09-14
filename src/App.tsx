@@ -840,7 +840,7 @@ export default function App() {
 
               <div className="mt-4 text-center">
                 <div className="text-sm line-through text-white/50">DE R$ 197,00</div>
-                <div className="text-xs text-white/50 uppercase">EM ATÉ 4X NO CARTÃO</div>
+                <div className="text-xs text-white/50 uppercase">EM ATÉ 5X NO CARTÃO</div>
                 <div className="mt-2 text-4xl font-black">
                   <span
                     style={{
@@ -850,10 +850,10 @@ export default function App() {
                       color: 'transparent',
                     }}
                   >
-                    R$ 39,90
+                    R$ 47,90
                   </span>
                 </div>
-                <div className="text-xs text-white/70">OU 4X DE R$ 9,97 SEM JUROS</div>
+                <div className="text-xs text-white/70">OU 5X DE R$ 9,58 SEM JUROS</div>
               </div>
 
               <ul className="mt-6 space-y-2 text-sm text-white/80">
