@@ -83,7 +83,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                     color: 'transparent',
                   }}
                 >
-                  R$ 21,90
+                  R$ 24,90
                 </span>
               </div>
               <div className="text-xs text-white/70 mt-1">Pagamento único • Acesso vitalício</div>
@@ -113,7 +113,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                   color: '#000000',
                 }}
               >
-                SIM! QUERO O COMPLETO POR R$ 21,90
+                SIM! QUERO O COMPLETO POR R$ 24,90
               </a>
               <a
                 href={CHECKOUT_URLS.basicCheckout}
