@@ -86,7 +86,7 @@ export default function App() {
               }}
             >
               <video
-                src="https://www.centralprime3d.com.br/assets/0fa52fd653.mp4"
+                src="https://i.imgur.com/P75CKxE.mp4"
                 poster="/assets/hero_poster.webp"
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls

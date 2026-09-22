@@ -34,26 +34,34 @@ export const Carousel: React.FC<CarouselProps> = ({
   const handleNext = () => scrollToIndex(currentIndex + 1);
   const handlePrev = () => scrollToIndex(currentIndex - 1);
 
-  // Sync index on manual scroll/touch
-  const handleScroll = () => {
-    if (!trackRef.current) return;
-    const scrollLeft = trackRef.current.scrollLeft;
-    const children = Array.from(trackRef.current.children) as HTMLElement[];
-    let closestIndex = 0;
-    let minDiff = Infinity;
+  const rafId = useRef<number | null>(null);
 
-    children.forEach((child, idx) => {
-      const diff = Math.abs(child.offsetLeft - trackRef.current!.offsetLeft - scrollLeft);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closestIndex = idx;
+  // Sync index on manual scroll/touch with 0ms jank via RAF
+  const handleScroll = () => {
+    if (rafId.current !== null) return;
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = null;
+      if (!trackRef.current) return;
+      const scrollLeft = trackRef.current.scrollLeft;
+      const firstChild = trackRef.current.firstElementChild as HTMLElement | null;
+      if (!firstChild) return;
+      const itemWidth = firstChild.offsetWidth + 16; // 16px is gap-4
+      if (itemWidth <= 0) return;
+      const closestIndex = Math.round(scrollLeft / itemWidth);
+      const clampedIndex = Math.max(0, Math.min(closestIndex, items.length - 1));
+      if (clampedIndex !== currentIndex) {
+        setCurrentIndex(clampedIndex);
       }
     });
-
-    if (closestIndex !== currentIndex) {
-      setCurrentIndex(closestIndex);
-    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (isHovered || autoPlayInterval <= 0) return;
