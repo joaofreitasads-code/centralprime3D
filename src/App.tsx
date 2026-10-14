@@ -13,6 +13,7 @@ import { InfiniteMarquee } from './components/InfiniteMarquee';
 import { TestimonialsCarousel } from './components/TestimonialsCarousel';
 import { FaqSection } from './components/FaqSection';
 import { YouTubeFacade } from './components/YouTubeFacade';
+import { trackInitiateCheckout } from './utils/pixel';
 
 // Lazy-load modal to avoid loading motion library on initial page render
 const SpecialOfferModal = React.lazy(() =>
@@ -917,6 +918,7 @@ export default function App() {
                 href={CHECKOUT_URLS.premium}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackInitiateCheckout('Plano Vitalício Completo', 97.0)}
                 className="mt-8 block text-center w-full py-4 rounded-full font-black uppercase text-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl"
                 style={{
                   backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
@@ -1037,6 +1039,7 @@ export default function App() {
             href={CHECKOUT_URLS.premium}
             target="_blank"
             rel="noreferrer"
+            onClick={() => trackInitiateCheckout('Plano Vitalício Completo - CTA Final', 97.0)}
             className="inline-block mt-8 px-8 py-4 rounded-full font-black text-lg uppercase tracking-wider text-black shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',

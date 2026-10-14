@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CHECKOUT_URLS } from '../data/pageData';
+import { trackInitiateCheckout } from '../utils/pixel';
 
 interface SpecialOfferModalProps {
   isOpen: boolean;
@@ -106,6 +107,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                 href={CHECKOUT_URLS.specialOfferDiscount}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackInitiateCheckout('Oferta Especial Completo R$ 24,90', 24.90)}
                 className="block text-center w-full py-3.5 rounded-full font-black text-black uppercase text-sm tracking-wide shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
                 style={{
                   backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
@@ -119,6 +121,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                 href={CHECKOUT_URLS.basicCheckout}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackInitiateCheckout('Plano Básico R$ 37,00', 37.00)}
                 className="block text-center w-full py-3 rounded-full font-bold text-white uppercase text-xs tracking-wide hover:brightness-110 active:scale-95 transition"
                 style={{ backgroundColor: '#0066ff', boxShadow: '0 8px 25px -5px rgba(0, 102, 255, 0.5)' }}
               >
