@@ -121,7 +121,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                 href={CHECKOUT_URLS.basicCheckout}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => trackInitiateCheckout('Plano Básico R$ 37,00', 37.00)}
+                onClick={() => trackInitiateCheckout('Plano Básico R$ 10,90', 10.90)}
                 className="block text-center w-full py-3 rounded-full font-bold text-white uppercase text-xs tracking-wide hover:brightness-110 active:scale-95 transition"
                 style={{ backgroundColor: '#0066ff', boxShadow: '0 8px 25px -5px rgba(0, 102, 255, 0.5)' }}
               >
