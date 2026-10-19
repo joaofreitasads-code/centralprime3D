@@ -5,8 +5,7 @@ declare global {
 }
 
 /**
- * Dispatches a standard Meta Pixel event to all initialized pixels
- * (e.g., Pixel 1368569075303614 and Pixel 1079241104970709).
+ * Dispatches a standard tracking event if tracker is available.
  */
 export const trackPixelEvent = (
   eventName: string,

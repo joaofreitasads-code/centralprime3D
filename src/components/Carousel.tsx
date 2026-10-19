@@ -133,9 +133,8 @@ export const Carousel: React.FC<CarouselProps> = ({
                   <img
                     src={item.img}
                     alt={item.name}
-                    loading={isInitial ? 'eager' : 'lazy'}
+                    loading="lazy"
                     decoding="async"
-                    fetchPriority={isInitial ? 'high' : 'auto'}
                     width="400"
                     height="400"
                     referrerPolicy="no-referrer"

@@ -51,9 +51,8 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
                   <img
                     src={item.img}
                     alt={item.name}
-                    loading={isInitial ? 'eager' : 'lazy'}
+                    loading="lazy"
                     decoding="async"
-                    fetchPriority={isInitial ? 'high' : 'auto'}
                     width="270"
                     height="270"
                     referrerPolicy="no-referrer"

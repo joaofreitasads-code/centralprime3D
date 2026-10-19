@@ -92,7 +92,7 @@ export default function App() {
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls
                 playsInline
-                preload="metadata"
+                preload="none"
                 className="absolute inset-0 h-full w-full object-cover"
               >
                 Seu navegador não suporta a reprodução deste vídeo.
@@ -784,6 +784,8 @@ export default function App() {
 
               <button
                 type="button"
+                onMouseEnter={() => import('./components/SpecialOfferModal')}
+                onTouchStart={() => import('./components/SpecialOfferModal')}
                 onClick={() => setIsModalOpen(true)}
                 className="mt-8 w-full py-3 rounded-full font-bold border border-white/20 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/40 active:scale-95 transition cursor-pointer"
               >
