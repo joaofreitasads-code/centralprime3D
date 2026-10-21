@@ -853,10 +853,10 @@ export default function App() {
                       color: 'transparent',
                     }}
                   >
-                    R$ 47,90
+                    R$ 57,90
                   </span>
                 </div>
-                <div className="text-xs text-white/70">OU 5X DE R$ 9,58 SEM JUROS</div>
+                <div className="text-xs text-white/70">OU 5X DE R$ 11,58 SEM JUROS</div>
               </div>
 
               <ul className="mt-6 space-y-2 text-sm text-white/80">
@@ -920,7 +920,7 @@ export default function App() {
                 href={CHECKOUT_URLS.premium}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => trackInitiateCheckout('Plano Vitalício Completo R$ 47,90', 47.90)}
+                onClick={() => trackInitiateCheckout('Plano Vitalício Completo R$ 57,90', 57.90)}
                 className="mt-8 block text-center w-full py-4 rounded-full font-black uppercase text-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl"
                 style={{
                   backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
@@ -1041,7 +1041,7 @@ export default function App() {
             href={CHECKOUT_URLS.premium}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Plano Vitalício Completo - CTA Final R$ 47,90', 47.90)}
+            onClick={() => trackInitiateCheckout('Plano Vitalício Completo - CTA Final R$ 57,90', 57.90)}
             className="inline-block mt-8 px-8 py-4 rounded-full font-black text-lg uppercase tracking-wider text-black shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
