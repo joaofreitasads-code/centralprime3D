@@ -87,14 +87,15 @@ export default function App() {
               }}
             >
               <video
-                src="https://i.imgur.com/P75CKxE.mp4"
                 poster="/assets/hero_poster.webp"
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls
                 playsInline
-                preload="none"
+                preload="metadata"
                 className="absolute inset-0 h-full w-full object-cover"
               >
+                <source src="/assets/hero_video.mp4" type="video/mp4" />
+                <source src="https://i.imgur.com/P75CKxE.mp4" type="video/mp4" />
                 Seu navegador não suporta a reprodução deste vídeo.
               </video>
             </div>
@@ -384,8 +385,9 @@ export default function App() {
                 key={idx}
                 src={imgSrc}
                 alt={`Prova de venda ${idx + 1}`}
-                loading="lazy"
+                loading={idx === 0 ? 'eager' : 'lazy'}
                 decoding="async"
+                fetchPriority={idx === 0 ? 'high' : 'auto'}
                 width="1163"
                 height="667"
                 referrerPolicy="no-referrer"
@@ -455,11 +457,11 @@ export default function App() {
           </h2>
 
           <p className="mt-4 text-center text-white/80 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
-            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os 14 bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
+            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os 16 bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
           </p>
 
           <div className="mt-12 grid md:grid-cols-2 gap-6">
-            {BONUSES.map((bonus) => (
+            {BONUSES.map((bonus, idx) => (
               <div
                 key={bonus.id}
                 className="rounded-2xl overflow-hidden p-4 flex gap-4 items-center transition-all duration-300 hover:scale-[1.02]"
@@ -472,8 +474,9 @@ export default function App() {
                 <img
                   src={bonus.img}
                   alt={bonus.title}
-                  loading="lazy"
+                  loading={idx < 4 ? 'eager' : 'lazy'}
                   decoding="async"
+                  fetchPriority={idx < 2 ? 'high' : 'auto'}
                   width="112"
                   height="112"
                   referrerPolicy="no-referrer"
@@ -907,6 +910,12 @@ export default function App() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span> Bônus 14: Universo Minecraft 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 15: Canecas Gamer 3D
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-500 font-bold">✓</span> Bônus 16: Canecas de Times de Futebol 3D
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-green-500 font-bold">✓</span> Download imediato

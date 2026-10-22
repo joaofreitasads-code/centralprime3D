@@ -90,7 +90,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             <span style={{ color: '#0066ff' }} className="font-bold">✓</span> +150.000 modelos STL
           </li>
           <li className="flex items-center gap-2">
-            <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os 14 bônus inclusos
+            <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os 16 bônus inclusos
           </li>
           <li className="flex items-center gap-2">
             <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Garantia de 14 dias

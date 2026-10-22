@@ -155,6 +155,18 @@ export const BONUSES: BonusItem[] = [
     desc: 'Personagens pixelados, espadas, ferramentas, blocos colecionáveis e luminárias temáticas de Minecraft. Um dos universos mais lucrativos para vendas rápidas em marketplaces.',
     img: '/assets/bonuses/minecraft_bonus.webp',
   },
+  {
+    id: 15,
+    title: 'CANECAS GAMER 3D',
+    desc: 'Modelos STL exclusivos de canecas, copos temáticos e suportes colecionáveis inspirados no universo gamer e geek. Uma das categorias mais lucrativas e procuradas para presentes criativos.',
+    img: '/assets/bonuses/canecas_gamer.webp',
+  },
+  {
+    id: 16,
+    title: 'CANECAS DE TIMES DE FUTEBOL 3D',
+    desc: 'Coleção exclusiva de canecas, suportes e copos temáticos com os maiores clubes de futebol. Nicho apaixonado e de altíssima procura para presentes e torcedores.',
+    img: '/assets/bonuses/canecas_times.webp',
+  },
 ];
 
 export const TESTIMONIALS = [

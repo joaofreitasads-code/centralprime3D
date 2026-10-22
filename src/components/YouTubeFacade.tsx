@@ -4,10 +4,12 @@ import { Play } from 'lucide-react';
 interface YouTubeFacadeProps {
   videoId: string;
   title: string;
+  posterUrl?: string;
 }
 
-export const YouTubeFacade: React.FC<YouTubeFacadeProps> = ({ videoId, title }) => {
+export const YouTubeFacade: React.FC<YouTubeFacadeProps> = ({ videoId, title, posterUrl }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const resolvedPoster = posterUrl || (videoId === 'yteFUptSQF0' ? '/assets/youtube_poster.webp' : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
 
   return (
     <div
@@ -34,7 +36,7 @@ export const YouTubeFacade: React.FC<YouTubeFacadeProps> = ({ videoId, title }) 
         >
           {/* High-quality poster thumbnail */}
           <img
-            src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+            src={resolvedPoster}
             alt={title}
             loading="lazy"
             decoding="async"
