@@ -19,9 +19,9 @@ export interface FaqItem {
 }
 
 export const CHECKOUT_URLS = {
-  premium: 'https://checkout.wiven.com.br/checkout/cmshvb4gg037j01pjdl6oi3dm?offer=FWJQZZE', // R$ 57,90
-  specialOfferDiscount: 'https://checkout.wiven.com.br/checkout/cmshw5bdb03m301pzscc17e3d?offer=9RV0VXZ', // R$ 24,90
-  basicCheckout: 'https://checkout.wiven.com.br/checkout/cmshzvujx006w01ol1hc3rexo?offer=BXAXVA6', // R$ 10,90
+  premium: 'https://ggcheckout.app/checkout/v5/XAOQdpzW6mfM7UYgA3VH80', // R$ 57,90
+  specialOfferDiscount: 'https://ggcheckout.app/checkout/v5/bVPDinseTqgusPwFmfQlHv', // R$ 27,90
+  basicCheckout: 'https://ggcheckout.app/checkout/v5/sroHpnvyPyMy6MDg6NjNFR', // R$ 10,90
 };
 
 export const SELECTED_MODELS: CarouselItem[] = [
