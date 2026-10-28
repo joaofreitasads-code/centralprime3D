@@ -9,7 +9,7 @@ interface YouTubeFacadeProps {
 
 export const YouTubeFacade: React.FC<YouTubeFacadeProps> = ({ videoId, title, posterUrl }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const resolvedPoster = posterUrl || (videoId === 'yteFUptSQF0' ? '/assets/youtube_poster.webp' : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`);
+  const resolvedPoster = posterUrl || '/assets/area_membros_poster.webp';
 
   return (
     <div
@@ -46,11 +46,11 @@ export const YouTubeFacade: React.FC<YouTubeFacadeProps> = ({ videoId, title, po
               // Fallback to standard quality if maxres doesn't exist
               (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
             }}
-            className="w-full h-full object-cover brightness-90 group-hover:brightness-100 transition-all duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover brightness-95 group-hover:brightness-105 transition-all duration-300 group-hover:scale-102"
           />
 
           {/* Vignette dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/60 group-hover:via-black/10 transition-all" />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-all" />
 
           {/* Central Play Button with neon glow */}
           <div className="absolute inset-0 flex flex-col items-center justify-center p-4">

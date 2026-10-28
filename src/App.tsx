@@ -2,6 +2,7 @@ import React, { useState, Suspense } from 'react';
 import {
   SELECTED_MODELS,
   SELECTED_MODELS_ROW2,
+  SELECTED_MODELS_ROW3,
   NICHES,
   PROOF_IMAGES,
   BONUSES,
@@ -87,15 +88,14 @@ export default function App() {
               }}
             >
               <video
+                src="https://i.imgur.com/P75CKxE.mp4"
                 poster="/assets/hero_poster.webp"
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls
                 playsInline
-                preload="metadata"
+                preload="none"
                 className="absolute inset-0 h-full w-full object-cover"
               >
-                <source src="/assets/hero_video.mp4" type="video/mp4" />
-                <source src="https://i.imgur.com/P75CKxE.mp4" type="video/mp4" />
                 Seu navegador não suporta a reprodução deste vídeo.
               </video>
             </div>
@@ -207,8 +207,10 @@ export default function App() {
           <div className="mt-10 space-y-4">
             {/* Linha 1: Modelos Originais (sentido normal para a esquerda) */}
             <InfiniteMarquee items={SELECTED_MODELS} direction="left" speedSeconds={34} />
-            {/* Linha 2: Novos Modelos Solicitados (sentido para a direita para dinamismo visual) */}
+            {/* Linha 2: Novos Modelos Lego (sentido para a direita para dinamismo visual) */}
             <InfiniteMarquee items={SELECTED_MODELS_ROW2} direction="right" speedSeconds={34} />
+            {/* Linha 3: Canecas Gamer Colecionáveis (sentido para a esquerda para dinamismo) */}
+            <InfiniteMarquee items={SELECTED_MODELS_ROW3} direction="left" speedSeconds={30} />
           </div>
 
           <p className="mt-6 text-center text-white/70 max-w-2xl mx-auto text-sm md:text-base">
@@ -555,6 +557,7 @@ export default function App() {
           <YouTubeFacade
             videoId="yteFUptSQF0"
             title="Área de Membros VIP — Central Prime 3D"
+            posterUrl="/assets/area_membros_poster.webp"
           />
 
           <div className="mt-10 grid md:grid-cols-3 gap-6 text-left">

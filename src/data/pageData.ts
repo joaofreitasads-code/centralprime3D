@@ -48,6 +48,14 @@ export const SELECTED_MODELS_ROW2: CarouselItem[] = [
   { name: 'LEGO BATMAN CLÁSSICO', img: '/assets/lego/model_9.webp', tag: '🦇 DC COMICS' },
 ];
 
+export const SELECTED_MODELS_ROW3: CarouselItem[] = [
+  { name: 'CANECA PLAYSTATION 3D', img: '/assets/row3/model_1.webp', tag: '🎮 PLAYSTATION' },
+  { name: 'CANECA COD MODERN WARFARE', img: '/assets/row3/model_2.webp', tag: '💥 CALL OF DUTY' },
+  { name: 'CANECA GTA VI 3D', img: '/assets/row3/model_3.webp', tag: '🌴 GTA VI TREND' },
+  { name: 'CANECA MINECRAFT TNT 3D', img: '/assets/row3/model_4.webp', tag: '⛏️ MINECRAFT' },
+  { name: 'CANECA MORTAL KOMBAT 3D', img: '/assets/row3/model_5.webp', tag: '🐉 MORTAL KOMBAT' },
+];
+
 export const NICHES: CarouselItem[] = [
   { name: 'LUMINÁRIAS DECORATIVAS', img: '/assets/niches/luminarias.webp', tag: '📈 MARKETPLACE' },
   { name: 'VEÍCULOS 3D', img: '/assets/niches/veiculos.webp', tag: '📈 MARKETPLACE' },
