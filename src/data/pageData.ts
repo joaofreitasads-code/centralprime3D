@@ -19,7 +19,7 @@ export interface FaqItem {
 }
 
 export const CHECKOUT_URLS = {
-  premium: 'https://ggcheckout.app/checkout/v5/XAOQdpzW6mfM7UYgA3VH80', // R$ 57,90
+  premium: 'https://ggcheckout.app/checkout/v5/XAOQdpzW6mfM7UYgA3VH80', // R$ 47,90
   specialOfferDiscount: 'https://ggcheckout.app/checkout/v5/bVPDinseTqgusPwFmfQlHv', // R$ 27,90
   basicCheckout: 'https://ggcheckout.app/checkout/v5/sroHpnvyPyMy6MDg6NjNFR', // R$ 10,90
 };
