@@ -79,7 +79,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                 color: 'transparent',
               }}
             >
-              R$ 27,90
+              R$ 21,90
             </span>
           </div>
           <div className="text-xs text-white/70 mt-1">Pagamento único • Acesso vitalício</div>
@@ -102,7 +102,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             href={CHECKOUT_URLS.specialOfferDiscount}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Oferta Especial Completo R$ 27,90', 27.90)}
+            onClick={() => trackInitiateCheckout('Oferta Especial Completo R$ 21,90', 21.90)}
             className="block text-center w-full py-3.5 rounded-full font-black text-black uppercase text-sm tracking-wide shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
@@ -110,7 +110,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
               color: '#000000',
             }}
           >
-            SIM! QUERO O COMPLETO POR R$ 27,90
+            SIM! QUERO O COMPLETO POR R$ 21,90
           </a>
           <a
             href={CHECKOUT_URLS.basicCheckout}

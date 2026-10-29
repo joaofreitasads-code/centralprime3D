@@ -19,9 +19,9 @@ export interface FaqItem {
 }
 
 export const CHECKOUT_URLS = {
-  premium: 'https://ggcheckout.app/checkout/v5/XAOQdpzW6mfM7UYgA3VH80', // R$ 47,90
-  specialOfferDiscount: 'https://ggcheckout.app/checkout/v5/bVPDinseTqgusPwFmfQlHv', // R$ 27,90
-  basicCheckout: 'https://ggcheckout.app/checkout/v5/sroHpnvyPyMy6MDg6NjNFR', // R$ 10,90
+  premium: 'https://appdigitalhub.com.br/c/79F4D72A', // R$ 47,90
+  specialOfferDiscount: 'https://appdigitalhub.com.br/c/0B7910C6', // R$ 21,90
+  basicCheckout: 'https://appdigitalhub.com.br/c/A938F3E0', // R$ 10,90
 };
 
 export const SELECTED_MODELS: CarouselItem[] = [
