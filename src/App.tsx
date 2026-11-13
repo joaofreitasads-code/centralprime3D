@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import {
   SELECTED_MODELS,
   SELECTED_MODELS_ROW2,
@@ -8,13 +8,17 @@ import {
   BONUSES,
   TESTIMONIALS,
   CHECKOUT_URLS,
+  trackInitiateCheckout,
 } from './data/pageData';
-import { Carousel } from './components/Carousel';
-import { InfiniteMarquee } from './components/InfiniteMarquee';
-import { TestimonialsCarousel } from './components/TestimonialsCarousel';
-import { FaqSection } from './components/FaqSection';
-import { YouTubeFacade } from './components/YouTubeFacade';
-import { trackInitiateCheckout } from './utils/pixel';
+import {
+  Carousel,
+  InfiniteMarquee,
+  TestimonialsCarousel,
+  FaqSection,
+  VideoTourPlayer,
+  PricingSection,
+  GallerySection,
+} from './components/PageSections';
 
 // Lazy-load modal to avoid loading motion library on initial page render
 const SpecialOfferModal = React.lazy(() =>
@@ -23,6 +27,14 @@ const SpecialOfferModal = React.lazy(() =>
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [heroVideoPreload, setHeroVideoPreload] = useState<'none' | 'metadata'>('none');
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setHeroVideoPreload('metadata');
+    }, 1000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const scrollToPremiumOffer = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -93,7 +105,9 @@ export default function App() {
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls
                 playsInline
-                preload="none"
+                preload={heroVideoPreload}
+                onMouseEnter={() => setHeroVideoPreload('metadata')}
+                onTouchStart={() => setHeroVideoPreload('metadata')}
                 className="absolute inset-0 h-full w-full object-cover"
               >
                 Seu navegador não suporta a reprodução deste vídeo.
@@ -387,11 +401,10 @@ export default function App() {
                 key={idx}
                 src={imgSrc}
                 alt={`Prova de venda ${idx + 1}`}
-                loading={idx === 0 ? 'eager' : 'lazy'}
+                loading="lazy"
                 decoding="async"
-                fetchPriority={idx === 0 ? 'high' : 'auto'}
-                width="1163"
-                height="667"
+                width="880"
+                height="438"
                 referrerPolicy="no-referrer"
                 className="w-full rounded-xl shadow-xl transition-transform hover:scale-[1.01]"
                 style={{
@@ -459,11 +472,11 @@ export default function App() {
           </h2>
 
           <p className="mt-4 text-center text-white/80 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
-            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os 16 bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
+            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os 19 bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
           </p>
 
           <div className="mt-12 grid md:grid-cols-2 gap-6">
-            {BONUSES.map((bonus, idx) => (
+            {BONUSES.map((bonus) => (
               <div
                 key={bonus.id}
                 className="rounded-2xl overflow-hidden p-4 flex gap-4 items-center transition-all duration-300 hover:scale-[1.02]"
@@ -476,9 +489,8 @@ export default function App() {
                 <img
                   src={bonus.img}
                   alt={bonus.title}
-                  loading={idx < 4 ? 'eager' : 'lazy'}
+                  loading="lazy"
                   decoding="async"
-                  fetchPriority={idx < 2 ? 'high' : 'auto'}
                   width="112"
                   height="112"
                   referrerPolicy="no-referrer"
@@ -553,11 +565,11 @@ export default function App() {
             Nada de arquivos espalhados e pastas confusas. A Central Prime foi organizada para facilitar sua busca e acelerar seus testes.
           </p>
 
-          {/* YouTube Video Tour via Ultra-Fast Facade */}
-          <YouTubeFacade
-            videoId="yteFUptSQF0"
+          {/* Vídeo Tour da Área de Membros VIP */}
+          <VideoTourPlayer
+            src="https://i.imgur.com/lIIN0dw.mp4"
+            poster="/assets/area_membros_new_poster.webp"
             title="Área de Membros VIP — Central Prime 3D"
-            posterUrl="/assets/area_membros_poster.webp"
           />
 
           <div className="mt-10 grid md:grid-cols-3 gap-6 text-left">
@@ -741,210 +753,11 @@ export default function App() {
           </a>
         </section>
 
-        {/* SECTION: OFERTA */}
-        <section id="oferta" className="px-4 py-20 max-w-5xl mx-auto scroll-mt-16 perf-section">
-          <h2 className="text-3xl md:text-5xl font-black text-center uppercase">
-            ESCOLHA SEU{' '}
-            <span
-              style={{
-                backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              ACESSO
-            </span>
-          </h2>
+        {/* SECTION: MODELOS E IMPRESSÕES NA PRÁTICA (3 CARROSSÉIS INFINITOS) */}
+        <GallerySection onCtaClick={scrollToPremiumOffer} />
 
-          <p className="mt-4 text-center text-white/70">
-            Inicie sua operação de produtos 3D agora mesmo.
-          </p>
-
-          <div className="mt-10 grid md:grid-cols-2 gap-6 items-start">
-            {/* PLANO BASICO */}
-            <div
-              id="plano-basico"
-              className="p-8 rounded-2xl relative scroll-mt-20 flex flex-col justify-between transition-all duration-300 hover:scale-[1.01]"
-              style={{
-                border: '1.5px solid #0066ff',
-                boxShadow: '0 0 20px rgba(0, 102, 255, 0.25)',
-                backgroundColor: '#1a1c1f',
-              }}
-            >
-              <div>
-                <h3 className="font-black text-xl uppercase">CENTRAL 3D BÁSICO</h3>
-                <div className="mt-4 text-3xl font-black">R$ 10,90</div>
-                <ul className="mt-6 space-y-2 text-sm text-white/80">
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500 font-bold">✓</span> Pack com +150.000 arquivos STL
-                  </li>
-                  <li className="flex items-center gap-2 text-white/60">
-                    <span style={{ color: '#0066ff' }} className="font-bold">✕</span> Sem os demais Bônus
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500 font-bold">✓</span> Acesso vitalício
-                  </li>
-                </ul>
-              </div>
-
-              <button
-                type="button"
-                onMouseEnter={() => import('./components/SpecialOfferModal')}
-                onTouchStart={() => import('./components/SpecialOfferModal')}
-                onClick={() => setIsModalOpen(true)}
-                className="mt-8 w-full py-3 rounded-full font-bold border border-white/20 bg-white/5 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/40 active:scale-95 transition cursor-pointer"
-              >
-                Começar pelo básico
-              </button>
-            </div>
-
-            {/* PLANO COMPLETO PREMIUM */}
-            <div
-              id="oferta-3990"
-              className="p-8 rounded-2xl relative scroll-mt-24 transition-all duration-300 hover:scale-[1.01]"
-              style={{
-                border: '2.5px solid #0066ff',
-                backgroundColor: '#1a1c1f',
-                boxShadow: '0 0 45px rgba(0, 102, 255, 0.55), 0 0 15px rgba(0, 102, 255, 0.3)',
-              }}
-            >
-              <div
-                className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-black text-white"
-                style={{
-                  backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                  boxShadow: '0 0 15px rgba(0, 102, 255, 0.6)',
-                }}
-              >
-                🏆 PLANO COMPLETO • MAIS ESCOLHIDO
-              </div>
-
-              <h3 className="text-center font-black text-xl uppercase mt-2">
-                <span
-                  style={{
-                    backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    color: 'transparent',
-                  }}
-                >
-                  CENTRAL PRIME 3D™ PREMIUM
-                </span>
-              </h3>
-
-              <p className="mt-2 text-center text-xs font-black uppercase tracking-wider text-white/80">
-                Todos os modelos + todos os bônus
-              </p>
-
-              <img
-                src="/assets/premium_plan.webp"
-                alt="Central Prime 3D™ Premium"
-                loading="lazy"
-                decoding="async"
-                width="208"
-                height="208"
-                referrerPolicy="no-referrer"
-                className="mt-4 w-52 max-w-full mx-auto drop-shadow-2xl object-contain"
-              />
-
-              <div className="mt-4 text-center">
-                <div className="text-sm line-through text-white/50">DE R$ 197,00</div>
-                <div className="text-xs text-white/50 uppercase">EM ATÉ 5X NO CARTÃO</div>
-                <div className="mt-2 text-4xl font-black">
-                  <span
-                    style={{
-                      backgroundImage: 'linear-gradient(135deg, #0066ff, #00d4ff)',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      color: 'transparent',
-                    }}
-                  >
-                    R$ 47,90
-                  </span>
-                </div>
-                <div className="text-xs text-white/70">OU 5X DE R$ 9,58 SEM JUROS</div>
-              </div>
-
-              <ul className="mt-6 space-y-2 text-sm text-white/80">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> +150.000 models 3D organizados
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Categorias para Shopee e Mercado Livre
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 1: Pack de Veículos 3D Profissionais
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 2: Coleção Heróis da Marvel
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 3: Pack de Chaveiros Personalizados
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 4: Modelos Flexíveis e Articulados
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 5: Coleção Clássicos dos Desenhos
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 6: Coleção Máscaras 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 7: Coleção Pokémon 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 8: Coleção 3D de Natal
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 9: Coleção Copa do Mundo
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 10: Mascote Esportivo Exclusivos
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 11: +250 Luminárias STL
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 12: Bichinhos Amigurumi 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 13: Coleção Lego 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 14: Universo Minecraft 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 15: Canecas Gamer 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Bônus 16: Canecas de Times de Futebol 3D
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Download imediato
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500 font-bold">✓</span> Garantia de 14 dias
-                </li>
-              </ul>
-
-              <a
-                href={CHECKOUT_URLS.premium}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => trackInitiateCheckout('Plano Vitalício Completo R$ 47,90', 47.90)}
-                className="mt-8 block text-center w-full py-4 rounded-full font-black uppercase text-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl"
-                style={{
-                  backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
-                  boxShadow: '0 0 35px rgba(0, 255, 102, 0.7), 0 10px 30px rgba(0, 255, 102, 0.4)',
-                  color: '#000000',
-                }}
-              >
-                Quero o plano completo
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* SECTION: OFERTA (3 PLANOS) */}
+        <PricingSection onOpenBasicModal={() => setIsModalOpen(true)} />
 
         {/* SECTION: GARANTIA DE 14 DIAS */}
         <section id="garantia" className="px-4 py-16 sm:py-20 max-w-4xl mx-auto scroll-mt-16 perf-section">
@@ -1053,7 +866,7 @@ export default function App() {
             href={CHECKOUT_URLS.premium}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Plano Vitalício Completo - CTA Final R$ 47,90', 47.90)}
+            onClick={() => trackInitiateCheckout('Plano Vitalício Completo - CTA Final R$ 57,90', 57.90)}
             className="inline-block mt-8 px-8 py-4 rounded-full font-black text-lg uppercase tracking-wider text-black shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',

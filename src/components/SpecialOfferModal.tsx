@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { CHECKOUT_URLS } from '../data/pageData';
-import { trackInitiateCheckout } from '../utils/pixel';
+import { CHECKOUT_URLS, trackInitiateCheckout } from '../data/pageData';
 
 interface SpecialOfferModalProps {
   isOpen: boolean;
@@ -69,7 +68,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
         </p>
 
         <div className="mt-6 text-center">
-          <div className="text-sm line-through text-white/50">DE R$ 47,90</div>
+          <div className="text-sm line-through text-white/50">DE R$ 57,90</div>
           <div className="mt-1 text-5xl font-black">
             <span
               style={{
@@ -79,7 +78,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
                 color: 'transparent',
               }}
             >
-              R$ 21,90
+              R$ 27,90
             </span>
           </div>
           <div className="text-xs text-white/70 mt-1">Pagamento único • Acesso vitalício</div>
@@ -90,7 +89,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             <span style={{ color: '#0066ff' }} className="font-bold">✓</span> +150.000 modelos STL
           </li>
           <li className="flex items-center gap-2">
-            <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os 16 bônus inclusos
+            <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os 19 bônus inclusos
           </li>
           <li className="flex items-center gap-2">
             <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Garantia de 14 dias
@@ -102,7 +101,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             href={CHECKOUT_URLS.specialOfferDiscount}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Oferta Especial Completo R$ 21,90', 21.90)}
+            onClick={() => trackInitiateCheckout('Oferta Especial Completo R$ 27,90', 27.90)}
             className="block text-center w-full py-3.5 rounded-full font-black text-black uppercase text-sm tracking-wide shadow-xl hover:scale-[1.02] active:scale-95 transition-all"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
@@ -110,7 +109,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
               color: '#000000',
             }}
           >
-            SIM! QUERO O COMPLETO POR R$ 21,90
+            SIM! QUERO O COMPLETO POR R$ 27,90
           </a>
           <a
             href={CHECKOUT_URLS.basicCheckout}

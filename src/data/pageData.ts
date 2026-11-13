@@ -19,8 +19,8 @@ export interface FaqItem {
 }
 
 export const CHECKOUT_URLS = {
-  premium: 'https://appdigitalhub.com.br/c/79F4D72A', // R$ 47,90
-  specialOfferDiscount: 'https://appdigitalhub.com.br/c/0B7910C6', // R$ 21,90
+  premium: 'https://appdigitalhub.com.br/c/79F4D72A', // R$ 57,90
+  specialOfferDiscount: 'https://appdigitalhub.com.br/c/0B7910C6', // R$ 27,90
   basicCheckout: 'https://appdigitalhub.com.br/c/A938F3E0', // R$ 10,90
 };
 
@@ -73,8 +73,42 @@ export const NICHES: CarouselItem[] = [
 export const PROOF_IMAGES = [
   '/assets/proofs/proof_1.webp',
   '/assets/proofs/proof_2.webp',
-  '/assets/proofs/proof_3.webp',
-  '/assets/proofs/proof_4.webp',
+  '/assets/proofs/proof_3_moletom.webp',
+  '/assets/proofs/proof_4_new.webp',
+];
+
+export const GALLERY_ROW1 = [
+  '/assets/gallery/c1_1.webp',
+  '/assets/gallery/c1_2.webp',
+  '/assets/gallery/c1_3.webp',
+  '/assets/gallery/c1_4.webp',
+  '/assets/gallery/c1_5.webp',
+  '/assets/gallery/c1_6.webp',
+  '/assets/gallery/c1_7.webp',
+];
+
+export const GALLERY_ROW2 = [
+  '/assets/gallery/c2_1.webp',
+  '/assets/gallery/c2_2.webp',
+  '/assets/gallery/c2_3.webp',
+  '/assets/gallery/c2_4.webp',
+  '/assets/gallery/c2_5.webp',
+  '/assets/gallery/c2_6.webp',
+  '/assets/gallery/c2_7.webp',
+  '/assets/gallery/c2_8.webp',
+  '/assets/gallery/c2_9.webp',
+  '/assets/gallery/c2_10.webp',
+];
+
+export const GALLERY_ROW3 = [
+  '/assets/gallery/c3_1.webp',
+  '/assets/gallery/c3_2.webp',
+  '/assets/gallery/c3_3.webp',
+  '/assets/gallery/c3_4.webp',
+  '/assets/gallery/c3_5.webp',
+  '/assets/gallery/c3_6.webp',
+  '/assets/gallery/c3_7.webp',
+  '/assets/gallery/c3_8.webp',
 ];
 
 export const BONUSES: BonusItem[] = [
@@ -175,6 +209,27 @@ export const BONUSES: BonusItem[] = [
     desc: 'Coleção exclusiva de canecas, suportes e copos temáticos com os maiores clubes de futebol. Nicho apaixonado e de altíssima procura para presentes e torcedores.',
     img: '/assets/bonuses/canecas_times.webp',
   },
+  {
+    id: 17,
+    title: 'CANECA ESTILO MOLETOM 3D',
+    desc: 'Design inovador e criativo de canecas 3D vestindo mini moletom com capuz e detalhes têxteis modelados, grande sucesso de procura para presentes.',
+    img: '/assets/bonuses/caneca_moletom.webp',
+    imgClass: 'object-contain object-center p-1',
+  },
+  {
+    id: 18,
+    title: 'RÉPLICAS DE ESTÁDIOS DE FUTEBOL EM 3D',
+    desc: 'Coleção especial de maquetes e réplicas de grandes estádios e arenas do futebol modelados para impressão 3D, com riqueza de detalhes para decoração e colecionadores.',
+    img: '/assets/bonuses/estadios_3d.webp',
+    imgClass: 'object-contain object-center p-1',
+  },
+  {
+    id: 19,
+    title: 'PORTA COPOS MONSTER 3D',
+    desc: 'Adicione ao seu catálogo uma coleção exclusiva de porta copos inspirados no tema Monster em 3D, com visual marcante, relevo detalhado e alta saída para venda.',
+    img: '/assets/bonuses/porta_copos_monster.webp',
+    imgClass: 'object-contain object-center p-1',
+  },
 ];
 
 export const TESTIMONIALS = [
@@ -213,3 +268,30 @@ export const FAQS: FaqItem[] = [
     answer: 'Sim, o acesso é liberado imediatamente após a confirmação do pagamento.',
   },
 ];
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
+export const trackPixelEvent = (
+  eventName: string,
+  parameters?: Record<string, any>
+) => {
+  if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+    window.fbq('track', eventName, parameters);
+  }
+};
+
+export const trackInitiateCheckout = (
+  contentName: string,
+  value: number,
+  currency: string = 'BRL'
+) => {
+  trackPixelEvent('InitiateCheckout', {
+    content_name: contentName,
+    value,
+    currency,
+  });
+};
