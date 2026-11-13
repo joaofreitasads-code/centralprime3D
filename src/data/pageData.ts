@@ -2,6 +2,8 @@ export interface CarouselItem {
   name: string;
   img: string;
   tag: string;
+  spriteIndex?: number;
+  spriteCount?: number;
 }
 
 export interface BonusItem {
@@ -54,6 +56,51 @@ export const SELECTED_MODELS_ROW3: CarouselItem[] = [
   { name: 'CANECA GTA VI 3D', img: '/assets/row3/model_3.webp', tag: '🌴 GTA VI TREND' },
   { name: 'CANECA MINECRAFT TNT 3D', img: '/assets/row3/model_4.webp', tag: '⛏️ MINECRAFT' },
   { name: 'CANECA MORTAL KOMBAT 3D', img: '/assets/row3/model_5.webp', tag: '🐉 MORTAL KOMBAT' },
+];
+
+export const SELECTED_MODELS_GTA6: CarouselItem[] = [
+  {
+    name: 'SUPORTE PS5 GTA VI',
+    img: '/assets/models/gta6_collection.webp',
+    tag: '🎮 GTA VI',
+    spriteIndex: 0,
+    spriteCount: 6,
+  },
+  {
+    name: 'SUPORTE HEADSET GTA VI',
+    img: '/assets/models/gta6_collection.webp',
+    tag: '🎧 SETUP GAMER',
+    spriteIndex: 1,
+    spriteCount: 6,
+  },
+  {
+    name: 'SUPORTE CELULAR GTA VI',
+    img: '/assets/models/gta6_collection.webp',
+    tag: '📱 DESK SETUP',
+    spriteIndex: 2,
+    spriteCount: 6,
+  },
+  {
+    name: 'LIGHTBOX GTA VI',
+    img: '/assets/models/gta6_collection.webp',
+    tag: '💡 LUMINÁRIA',
+    spriteIndex: 3,
+    spriteCount: 6,
+  },
+  {
+    name: 'PLACA NEON VICE CITY',
+    img: '/assets/models/gta6_collection.webp',
+    tag: '🌴 VICE CITY',
+    spriteIndex: 4,
+    spriteCount: 6,
+  },
+  {
+    name: 'JACARÉ MACCA GTA VI',
+    img: '/assets/models/gta6_collection.webp',
+    tag: '🐊 COLECIONÁVEL',
+    spriteIndex: 5,
+    spriteCount: 6,
+  },
 ];
 
 export const NICHES: CarouselItem[] = [
@@ -228,6 +275,13 @@ export const BONUSES: BonusItem[] = [
     title: 'PORTA COPOS MONSTER 3D',
     desc: 'Adicione ao seu catálogo uma coleção exclusiva de porta copos inspirados no tema Monster em 3D, com visual marcante, relevo detalhado e alta saída para venda.',
     img: '/assets/bonuses/porta_copos_monster.webp',
+    imgClass: 'object-contain object-center p-1',
+  },
+  {
+    id: 20,
+    title: 'MODELOS GTA 6 & VICE CITY 3D',
+    desc: 'Adicione ao seu catálogo uma coleção incrível de modelos 3D inspirados em GTA 6 e Vice City, com personagens, dioramas, suportes gamer e peças exclusivas, ricas em detalhes e com grande potencial para atrair colecionadores e gerar vendas.',
+    img: '/assets/bonuses/gta6_vice_city.webp',
     imgClass: 'object-contain object-center p-1',
   },
 ];

@@ -230,7 +230,8 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
   direction = 'left',
   speedSeconds = 28,
 }) => {
-  const duplicatedItems = [...items, ...items];
+  const halfTrack = items.length < 9 ? [...items, ...items] : items;
+  const duplicatedItems = [...halfTrack, ...halfTrack];
   const animationName = direction === 'left' ? 'marquee-left' : 'marquee-right';
 
   return (
@@ -246,6 +247,9 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
       >
         {duplicatedItems.map((item, idx) => {
           const isInitial = idx < 4;
+          const isSprite = item.spriteIndex !== undefined;
+          const spriteCount = item.spriteCount || 6;
+
           return (
             <div
               key={`${item.name}-${idx}`}
@@ -260,17 +264,34 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
                   backgroundColor: '#1a1c1f',
                 }}
               >
-                <div className="relative aspect-square w-full overflow-hidden bg-neutral-900 flex items-center justify-center">
-                  <img
-                    src={item.img}
-                    alt={item.name}
-                    loading={isInitial ? 'eager' : 'lazy'}
-                    decoding="async"
-                    width="270"
-                    height="270"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center block"
-                  />
+                <div className="relative aspect-square w-full overflow-hidden bg-neutral-900">
+                  {isSprite ? (
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      loading={isInitial ? 'eager' : 'lazy'}
+                      decoding="async"
+                      width={270 * spriteCount}
+                      height={270}
+                      referrerPolicy="no-referrer"
+                      className="absolute top-0 left-0 h-full max-w-none block select-none"
+                      style={{
+                        width: `${spriteCount * 100}%`,
+                        transform: `translateX(-${((item.spriteIndex || 0) / spriteCount) * 100}%)`,
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      loading={isInitial ? 'eager' : 'lazy'}
+                      decoding="async"
+                      width="270"
+                      height="270"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center block"
+                    />
+                  )}
                 </div>
                 <div className="p-2.5 text-center text-xs md:text-sm font-black tracking-wide text-white uppercase truncate">
                   {item.name}
@@ -743,6 +764,7 @@ const BONUS_SHORT_TITLES: Record<number, string> = {
   17: 'Caneca Estilo Moletom 3D',
   18: 'Réplicas de Estádios de Futebol em 3D',
   19: 'Porta Copos Monster 3D',
+  20: 'Modelos GTA 6 & Vice City 3D',
 };
 
 export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal }) => {

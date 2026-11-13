@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { CHECKOUT_URLS, trackInitiateCheckout } from '../data/pageData';
+import { BONUSES, CHECKOUT_URLS, trackInitiateCheckout } from '../data/pageData';
 
 interface SpecialOfferModalProps {
   isOpen: boolean;
@@ -89,7 +89,7 @@ export const SpecialOfferModal: React.FC<SpecialOfferModalProps> = ({
             <span style={{ color: '#0066ff' }} className="font-bold">✓</span> +150.000 modelos STL
           </li>
           <li className="flex items-center gap-2">
-            <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os 19 bônus inclusos
+            <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Todos os {BONUSES.length} bônus inclusos
           </li>
           <li className="flex items-center gap-2">
             <span style={{ color: '#0066ff' }} className="font-bold">✓</span> Garantia de 14 dias

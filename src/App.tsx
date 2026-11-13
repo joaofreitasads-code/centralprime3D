@@ -3,6 +3,7 @@ import {
   SELECTED_MODELS,
   SELECTED_MODELS_ROW2,
   SELECTED_MODELS_ROW3,
+  SELECTED_MODELS_GTA6,
   NICHES,
   PROOF_IMAGES,
   BONUSES,
@@ -224,7 +225,9 @@ export default function App() {
             {/* Linha 2: Novos Modelos Lego (sentido para a direita para dinamismo visual) */}
             <InfiniteMarquee items={SELECTED_MODELS_ROW2} direction="right" speedSeconds={34} />
             {/* Linha 3: Canecas Gamer Colecionáveis (sentido para a esquerda para dinamismo) */}
-            <InfiniteMarquee items={SELECTED_MODELS_ROW3} direction="left" speedSeconds={30} />
+            <InfiniteMarquee items={SELECTED_MODELS_ROW3} direction="left" speedSeconds={32} />
+            {/* Linha 4: Novos Modelos GTA 6 & Vice City (sentido para a direita) */}
+            <InfiniteMarquee items={SELECTED_MODELS_GTA6} direction="right" speedSeconds={40} />
           </div>
 
           <p className="mt-6 text-center text-white/70 max-w-2xl mx-auto text-sm md:text-base">
@@ -472,7 +475,7 @@ export default function App() {
           </h2>
 
           <p className="mt-4 text-center text-white/80 max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
-            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os 19 bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
+            Ao garantir o seu <strong className="text-white font-bold underline decoration-[#0066ff]">Acesso Premium</strong>, você não leva apenas os modelos minerados — você recebe de presente <strong className="text-[#00d4ff] font-bold">todos os {BONUSES.length} bônus exclusivos abaixo</strong>, 100% liberados imediatamente na sua área de membros para começar a lucrar com diferentes nichos.
           </p>
 
           <div className="mt-12 grid md:grid-cols-2 gap-6">
