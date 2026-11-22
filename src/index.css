@@ -35,14 +35,21 @@ a, button {
 .gpu-layer {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  perspective: 1000px;
+}
+
+.marquee-track {
   will-change: transform;
 }
 
-/* Off-screen layout skipping for ultra-fast initial paint on mobile */
+/* Safe section isolation without hiding lazy carousel/marquee images */
 .perf-section {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+  contain: layout style;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-play-state: paused !important;
+  }
 }
 
 @keyframes marquee-left {

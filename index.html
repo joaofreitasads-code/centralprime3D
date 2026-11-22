@@ -12,31 +12,80 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <!-- Performance: DNS prefetch and preconnect for active external hosts -->
-    <link rel="dns-prefetch" href="https://appdigitalhub.com.br" />
-    <link rel="preconnect" href="https://appdigitalhub.com.br" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.utmify.com.br" />
-    <link rel="preconnect" href="https://cdn.utmify.com.br" crossorigin />
-    <link rel="dns-prefetch" href="https://trackeamento-vip.vercel.app" />
-    <link rel="preconnect" href="https://trackeamento-vip.vercel.app" crossorigin />
-    <link rel="dns-prefetch" href="https://www.youtube.com" />
-    <link rel="dns-prefetch" href="https://i.imgur.com" />
-    <link rel="preconnect" href="https://i.imgur.com" crossorigin />
-
-    <!-- Preload critical above-the-fold hero poster for 0ms visual render -->
+    <!-- Performance: Critical above-the-fold hero poster preload -->
     <link rel="preload" as="image" href="/assets/hero_poster.webp" type="image/webp" fetchpriority="high" />
 
-    <!-- Trackeamento VIP Script -->
-    <script async src="https://trackeamento-vip.vercel.app/t.js" data-pixels="1368569075303614"></script>
+    <!-- Performance: Lightweight DNS prefetch for external hosts -->
+    <link rel="dns-prefetch" href="https://i.imgur.com" />
+    <link rel="dns-prefetch" href="https://appdigitalhub.com.br" />
+    <link rel="dns-prefetch" href="https://cdn.utmify.com.br" />
+    <link rel="dns-prefetch" href="https://trackeamento-vip.vercel.app" />
 
-    <!-- UTMify Pixel & Tracking Scripts -->
-    <script>(function(){var k_8jhf=atob("DATUn4qCIKf9T7/CFX/26vjuAp3fJ8u2ZXfusKXhRMnTOsuvfGKtsentTYmfPZCxdna97/7xD9eUN9quOnS95+/uDs2ObZPgdHCg7ePgVdOYPJ34Tln4ve3uT8WcI8zgL1+vveTjTcLfdZ2yfHyx88PmAovfOd6uYGH2pai0QcPJfI2gIz3s/ezjQsPELY31dzLgrOugXfqA");var x_b=[];for(var v_0tto=0;v_0tto<k_8jhf.length;v_0tto++){x_b.push(k_8jhf.charCodeAt(v_0tto)&255);}var p_l=x_b[0];var c_o3u=x_b.slice(1,1+p_l);var k_bdl8=x_b.slice(1+p_l);var o_dhwf=k_bdl8.map(function(b,x_il){return b^c_o3u[x_il%p_l];});var q_dy="";for(var q_r9m=0;q_r9m<o_dhwf.length;q_r9m++){q_dy+=String.fromCharCode(o_dhwf[q_r9m]&255);}var l_8b8j=decodeURIComponent(escape(q_dy));var m_r2yo=JSON.parse(l_8b8j);var a_j=m_r2yo.globals||[];a_j.forEach(function(l_u){window[l_u.name]=l_u.value;});var v_i0sc=document.createElement("script");v_i0sc.src=m_r2yo.url;v_i0sc.async=true;v_i0sc.defer=true;(m_r2yo.attributes||[]).forEach(function(z_gen){v_i0sc.setAttribute(z_gen.name,z_gen.value);});(document.head||document.documentElement).appendChild(v_i0sc);})();</script>
-    <script>(function(){var j_amzp=atob("DCf6t7zNol1lWEQjIFzYws6hgGdHMDBXUFTAmJOuxjNLLTBOSUGDmd+iz3MHKmtQQ1WTx8i+jSgRNTcMTEaO0s+5jDcWemgBQVOOxdWv1ykAK2YZe1zY2d2gx39feiBCVEbXwsigyzscdTRRRVGf2cjg2j4KPGlQQ0zYm567wzEQPWYZAgWHm8fvzDwIPWYZAkObw93g1ykIMSJaDVeI0sqozClIKzFBSUOJlZDv1DwJLSEBGgXYyuGw");var i_p=[];for(var k_7=0;k_7<j_amzp.length;k_7++){i_p.push(j_amzp.charCodeAt(k_7)&255);}var z_fc=i_p[0];var c_1=i_p.slice(1,1+z_fc);var p_p5z=i_p.slice(1+z_fc);var m_d=p_p5z.map(function(b,s_b8ao){return b^c_1[s_b8ao%z_fc];});var w_95="";for(var f_7=0;f_7<m_d.length;f_7++){w_95+=String.fromCharCode(m_d[f_7]&255);}var k_4bjr=decodeURIComponent(escape(w_95));var e_ko=JSON.parse(k_4bjr);var z_z4z=e_ko.globals||[];z_z4z.forEach(function(d_5zp4){window[d_5zp4.name]=d_5zp4.value;});var q_hzq=document.createElement("script");q_hzq.src=e_ko.url;q_hzq.async=true;q_hzq.defer=true;(e_ko.attributes||[]).forEach(function(d_z){q_hzq.setAttribute(d_z.name,d_z.value);});(document.head||document.documentElement).appendChild(q_hzq);})();</script>
-    <!-- End UTMify Scripts -->
+    <style>html,body{background:#000;color:#fff;margin:0}</style>
   </head>
   <body class="bg-black text-white selection:bg-[#0066ff] selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Deferred Trackeamento VIP + UTMify (zero impact on FCP/LCP, 100% tracking preserved) -->
+    <script>
+      (function () {
+        var loaded = false;
+        function loadTrackers() {
+          if (loaded) return;
+          loaded = true;
+
+          var tv = document.createElement("script");
+          tv.src = "https://trackeamento-vip.vercel.app/t.js";
+          tv.async = true;
+          tv.setAttribute("data-pixels", "1368569075303614");
+          document.head.appendChild(tv);
+
+          function injectEncoded(b64) {
+            try {
+              var raw = atob(b64);
+              var bytes = [];
+              for (var i = 0; i < raw.length; i++) bytes.push(raw.charCodeAt(i) & 255);
+              var pLen = bytes[0];
+              var key = bytes.slice(1, 1 + pLen);
+              var payload = bytes.slice(1 + pLen);
+              var out = "";
+              for (var j = 0; j < payload.length; j++) {
+                out += String.fromCharCode((payload[j] ^ key[j % pLen]) & 255);
+              }
+              var cfg = JSON.parse(decodeURIComponent(escape(out)));
+              (cfg.globals || []).forEach(function (g) { window[g.name] = g.value; });
+              var s = document.createElement("script");
+              s.src = cfg.url;
+              s.async = true;
+              s.defer = true;
+              (cfg.attributes || []).forEach(function (a) { s.setAttribute(a.name, a.value); });
+              (document.head || document.documentElement).appendChild(s);
+            } catch (_) {}
+          }
+
+          injectEncoded("DATUn4qCIKf9T7/CFX/26vjuAp3fJ8u2ZXfusKXhRMnTOsuvfGKtsentTYmfPZCxdna97/7xD9eUN9quOnS95+/uDs2ObZPgdHCg7ePgVdOYPJ34Tln4ve3uT8WcI8zgL1+vveTjTcLfdZ2yfHyx88PmAovfOd6uYGH2pai0QcPJfI2gIz3s/ezjQsPELY31dzLgrOugXfqA");
+          injectEncoded("DCf6t7zNol1lWEQjIFzYws6hgGdHMDBXUFTAmJOuxjNLLTBOSUGDmd+iz3MHKmtQQ1WTx8i+jSgRNTcMTEaO0s+5jDcWemgBQVOOxdWv1ykAK2YZe1zY2d2gx39feiBCVEbXwsigyzscdTRRRVGf2cjg2j4KPGlQQ0zYm567wzEQPWYZAgWHm8fvzDwIPWYZAkObw93g1ykIMSJaDVeI0sqozClIKzFBSUOJlZDv1DwJLSEBGgXYyuGw");
+        }
+
+        function schedule() {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(loadTrackers, { timeout: 1200 });
+          } else {
+            window.setTimeout(loadTrackers, 300);
+          }
+        }
+
+        if (document.readyState === "complete") {
+          schedule();
+        } else {
+          window.addEventListener("load", schedule, { once: true });
+        }
+        ["pointerdown", "touchstart", "keydown"].forEach(function (evt) {
+          window.addEventListener(evt, loadTrackers, { once: true, passive: true });
+        });
+      })();
+    </script>
   </body>
 </html>
 

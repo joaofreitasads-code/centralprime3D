@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import {
   SELECTED_MODELS,
   SELECTED_MODELS_ROW2,
@@ -28,14 +28,21 @@ const SpecialOfferModal = React.lazy(() =>
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [heroVideoPreload, setHeroVideoPreload] = useState<'none' | 'metadata'>('none');
+  const [heroVideoStarted, setHeroVideoStarted] = useState(false);
+  const heroVideoRef = React.useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setHeroVideoPreload('metadata');
-    }, 1000);
-    return () => window.clearTimeout(timer);
-  }, []);
+  const handleHeroVideoPlay = () => {
+    setHeroVideoStarted(true);
+    const video = heroVideoRef.current;
+    if (video) {
+      if (!video.getAttribute('src')) {
+        video.src = 'https://i.imgur.com/P75CKxE.mp4';
+      }
+      video.muted = false;
+      video.volume = 1;
+      video.play().catch(() => {});
+    }
+  };
 
   const scrollToPremiumOffer = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -86,14 +93,14 @@ export default function App() {
             </span>
           </h1>
 
-          {/* Hero Video */}
+          {/* Hero Video (Zero-bandwidth poster facade until clicked) */}
           <div className="mt-10 mx-auto w-full max-w-[360px] relative">
             <div
-              className="absolute -inset-10 blur-3xl opacity-50"
-              style={{ background: 'radial-gradient(circle at 50% 50%, #0066ff, transparent 70%)' }}
+              className="absolute -inset-12 pointer-events-none"
+              style={{ background: 'radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.36), transparent 68%)' }}
             />
             <div
-              className="relative rounded-3xl overflow-hidden"
+              className="relative rounded-3xl overflow-hidden bg-neutral-950"
               style={{
                 aspectRatio: '9 / 16',
                 border: '2px solid #0066ff',
@@ -101,18 +108,46 @@ export default function App() {
               }}
             >
               <video
-                src="https://i.imgur.com/P75CKxE.mp4"
-                poster="/assets/hero_poster.webp"
+                ref={heroVideoRef}
                 title="Vídeo de apresentação da Central Prime 3D"
-                controls
+                controls={heroVideoStarted}
                 playsInline
-                preload={heroVideoPreload}
-                onMouseEnter={() => setHeroVideoPreload('metadata')}
-                onTouchStart={() => setHeroVideoPreload('metadata')}
-                className="absolute inset-0 h-full w-full object-cover"
+                preload="none"
+                onEnded={() => setHeroVideoStarted(false)}
+                className={`absolute inset-0 h-full w-full object-cover ${heroVideoStarted ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
               >
                 Seu navegador não suporta a reprodução deste vídeo.
               </video>
+
+              {!heroVideoStarted && (
+                <button
+                  type="button"
+                  onClick={handleHeroVideoPlay}
+                  aria-label="Reproduzir vídeo de apresentação da Central Prime 3D"
+                  className="absolute inset-0 z-10 w-full h-full flex items-center justify-center cursor-pointer group focus:outline-none focus:ring-2 focus:ring-[#0066ff]"
+                >
+                  <img
+                    src="/assets/hero_poster.webp"
+                    alt="Vídeo de apresentação da Central Prime 3D"
+                    loading="eager"
+                    decoding="sync"
+                    fetchPriority="high"
+                    width="304"
+                    height="540"
+                    className="absolute inset-0 h-full w-full object-cover block"
+                  />
+                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors" />
+                  <span className="relative z-10 inline-flex items-center justify-center transition-transform duration-200 group-hover:scale-110 active:scale-95 drop-shadow-[0_10px_28px_rgba(0,0,0,0.75)]">
+                    <svg viewBox="0 0 68 48" className="w-[74px] h-[52px]" aria-hidden="true">
+                      <path
+                        d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z"
+                        fill="#FF0000"
+                      />
+                      <path d="M45 24L27 14v20" fill="#FFFFFF" />
+                    </svg>
+                  </span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -527,7 +562,7 @@ export default function App() {
         </section>
 
         {/* SECTION: AREA DE MEMBROS VIP */}
-        <section id="area" className="px-4 py-20 max-w-5xl mx-auto text-center scroll-mt-16 perf-section">
+        <section id="area" className="px-4 py-20 max-w-6xl mx-auto text-center scroll-mt-16 perf-section">
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider"
             style={{
@@ -570,12 +605,12 @@ export default function App() {
 
           {/* Vídeo Tour da Área de Membros VIP */}
           <VideoTourPlayer
-            src="https://i.imgur.com/lIIN0dw.mp4"
+            src="https://i.imgur.com/fxPFHOn.mp4"
             poster="/assets/area_membros_new_poster.webp"
             title="Área de Membros VIP — Central Prime 3D"
           />
 
-          <div className="mt-10 grid md:grid-cols-3 gap-6 text-left">
+          <div className="mt-10 max-w-5xl mx-auto grid md:grid-cols-3 gap-6 text-left">
             <div
               className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02]"
               style={{
@@ -776,8 +811,8 @@ export default function App() {
               {/* Imagem do Selo de 14 Dias */}
               <div className="flex-shrink-0 relative flex items-center justify-center">
                 <div
-                  className="absolute inset-0 rounded-full blur-2xl opacity-40"
-                  style={{ backgroundColor: '#0066ff' }}
+                  className="absolute -inset-6 rounded-full pointer-events-none"
+                  style={{ background: 'radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.32), transparent 68%)' }}
                 />
                 <img
                   src="/assets/garantia-14-dias.webp"

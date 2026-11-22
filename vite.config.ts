@@ -11,6 +11,9 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    esbuild: {
+      drop: ['console', 'debugger'],
+    },
     build: {
       target: 'esnext',
       cssCodeSplit: true,
@@ -21,9 +24,6 @@ export default defineConfig(() => {
             if (id.includes('node_modules')) {
               if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) {
                 return 'vendor-react';
-              }
-              if (id.includes('lucide-react')) {
-                return 'vendor-icons';
               }
             }
           },

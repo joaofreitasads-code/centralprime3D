@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   CarouselItem,
   BONUSES,
@@ -10,6 +9,54 @@ import {
   GALLERY_ROW3,
   trackInitiateCheckout,
 } from '../data/pageData';
+
+/* Shared IntersectionObserver hook: pauses off-screen animations/timers AND pre-loads images 600px before scrolling into view */
+function useInViewport<T extends HTMLElement>(
+  ref: React.RefObject<T | null>,
+  rootMargin: string = '600px 0px'
+): { isVisible: boolean; hasEntered: boolean } {
+  const [isVisible, setIsVisible] = useState(true);
+  const [hasEntered, setHasEntered] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      setHasEntered(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry) {
+          setIsVisible(entry.isIntersecting);
+          if (entry.isIntersecting) {
+            setHasEntered(true);
+          }
+        }
+      },
+      { rootMargin }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref, rootMargin]);
+
+  return { isVisible, hasEntered };
+}
+
+const ChevronLeftIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="m15 18-6-6 6-6" />
+  </svg>
+);
+
+const ChevronRightIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="m9 18 6-6-6-6" />
+  </svg>
+);
 
 /* ==================== CAROUSEL ==================== */
 interface CarouselProps {
@@ -23,9 +70,11 @@ export const Carousel: React.FC<CarouselProps> = ({
   items,
   autoPlayInterval = 3500,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const { isVisible, hasEntered } = useInViewport(containerRef, '600px 0px');
 
   const scrollToIndex = useCallback((index: number) => {
     if (!trackRef.current) return;
@@ -74,7 +123,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   }, []);
 
   useEffect(() => {
-    if (isHovered || autoPlayInterval <= 0) return;
+    if (isHovered || !isVisible || autoPlayInterval <= 0) return;
 
     let interval: NodeJS.Timeout | null = null;
 
@@ -109,10 +158,11 @@ export const Carousel: React.FC<CarouselProps> = ({
       stopTimer();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [currentIndex, isHovered, autoPlayInterval, scrollToIndex]);
+  }, [currentIndex, isHovered, isVisible, autoPlayInterval, scrollToIndex]);
 
   return (
     <div
+      ref={containerRef}
       id={id}
       className="relative"
       onMouseEnter={() => setIsHovered(true)}
@@ -141,7 +191,7 @@ export const Carousel: React.FC<CarouselProps> = ({
                 <img
                   src={item.img}
                   alt={item.name}
-                  loading="lazy"
+                  loading={hasEntered ? 'eager' : 'lazy'}
                   decoding="async"
                   width="400"
                   height="400"
@@ -230,23 +280,25 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
   direction = 'left',
   speedSeconds = 28,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { isVisible, hasEntered } = useInViewport(containerRef, '600px 0px');
   const halfTrack = items.length < 9 ? [...items, ...items] : items;
   const duplicatedItems = [...halfTrack, ...halfTrack];
   const animationName = direction === 'left' ? 'marquee-left' : 'marquee-right';
 
   return (
-    <div className="relative w-full overflow-hidden py-2 select-none group" style={{ contain: 'paint' }}>
+    <div ref={containerRef} className="relative w-full overflow-hidden py-2 select-none group" style={{ contain: 'paint' }}>
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 md:w-16 z-10 bg-gradient-to-r from-black to-transparent" />
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 md:w-16 z-10 bg-gradient-to-l from-black to-transparent" />
 
       <div
-        className="flex gap-4 pr-4 w-max group-hover:[animation-play-state:paused] gpu-layer"
+        className="flex gap-4 pr-4 w-max group-hover:[animation-play-state:paused] gpu-layer marquee-track"
         style={{
           animation: `${animationName} ${speedSeconds}s linear infinite`,
+          animationPlayState: isVisible ? 'running' : 'paused',
         }}
       >
         {duplicatedItems.map((item, idx) => {
-          const isInitial = idx < 4;
           const isSprite = item.spriteIndex !== undefined;
           const spriteCount = item.spriteCount || 6;
 
@@ -269,7 +321,7 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
                     <img
                       src={item.img}
                       alt={item.name}
-                      loading={isInitial ? 'eager' : 'lazy'}
+                      loading={hasEntered ? 'eager' : 'lazy'}
                       decoding="async"
                       width={270 * spriteCount}
                       height={270}
@@ -284,7 +336,7 @@ export const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
                     <img
                       src={item.img}
                       alt={item.name}
-                      loading={isInitial ? 'eager' : 'lazy'}
+                      loading={hasEntered ? 'eager' : 'lazy'}
                       decoding="async"
                       width="270"
                       height="270"
@@ -316,12 +368,15 @@ const MarqueeRow: React.FC<{
   speedSeconds: number;
   labelPrefix: string;
 }> = ({ images, direction, speedSeconds, labelPrefix }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { isVisible, hasEntered } = useInViewport(containerRef, '600px 0px');
   const halfTrack = images.length < 10 ? [...images, ...images] : images;
   const fullTrack = [...halfTrack, ...halfTrack];
   const animationName = direction === 'left' ? 'marquee-left' : 'marquee-right';
 
   return (
     <div
+      ref={containerRef}
       className="relative w-full overflow-hidden py-2 select-none group"
       style={{ contain: 'paint' }}
     >
@@ -329,9 +384,10 @@ const MarqueeRow: React.FC<{
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 md:w-16 z-10 bg-gradient-to-l from-black to-transparent" />
 
       <div
-        className="flex gap-3 sm:gap-4 pr-3 sm:pr-4 w-max group-hover:[animation-play-state:paused] gpu-layer"
+        className="flex gap-3 sm:gap-4 pr-3 sm:pr-4 w-max group-hover:[animation-play-state:paused] gpu-layer marquee-track"
         style={{
           animation: `${animationName} ${speedSeconds}s linear infinite`,
+          animationPlayState: isVisible ? 'running' : 'paused',
         }}
       >
         {fullTrack.map((src, idx) => (
@@ -350,7 +406,7 @@ const MarqueeRow: React.FC<{
               <img
                 src={src}
                 alt={`${labelPrefix} - Item ${(idx % images.length) + 1}`}
-                loading="lazy"
+                loading={hasEntered ? 'eager' : 'lazy'}
                 decoding="async"
                 width="240"
                 height="240"
@@ -450,68 +506,38 @@ interface VideoTourPlayerProps {
 
 export const VideoTourPlayer: React.FC<VideoTourPlayerProps> = ({ src, poster, title }) => {
   const [hasStarted, setHasStarted] = useState(false);
-  const [preloadMode, setPreloadMode] = useState<'none' | 'metadata'>('none');
-  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el || preloadMode !== 'none') return;
-
-    if (typeof IntersectionObserver === 'undefined') {
-      setPreloadMode('metadata');
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setPreloadMode('metadata');
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '500px 0px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [preloadMode]);
-
-  const warmMetadata = () => {
-    if (preloadMode === 'none') {
-      setPreloadMode('metadata');
-    }
-  };
-
   const handlePlay = () => {
-    setPreloadMode('metadata');
     setHasStarted(true);
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
+    const video = videoRef.current;
+    if (video) {
+      if (!video.getAttribute('src')) {
+        video.src = src;
+      }
+      video.muted = false;
+      video.volume = 1;
+      video.play().catch(() => {});
     }
   };
 
   return (
     <div
-      ref={containerRef}
-      onMouseEnter={warmMetadata}
-      onTouchStart={warmMetadata}
-      className="mt-8 w-full rounded-2xl overflow-hidden shadow-2xl relative group bg-neutral-950"
+      className="mt-8 w-[calc(100%+1rem)] -mx-2 sm:w-full sm:mx-0 rounded-2xl overflow-hidden shadow-2xl relative group bg-neutral-950"
       style={{
-        aspectRatio: '854 / 462',
+        aspectRatio: '854 / 480',
         border: '2px solid #0066ff',
         boxShadow: '0 0 45px rgba(0, 102, 255, 0.45), 0 0 15px rgba(0, 102, 255, 0.3)',
       }}
     >
       <video
         ref={videoRef}
-        src={src}
-        poster={poster}
         title={title}
         controls={hasStarted}
         playsInline
-        preload={preloadMode}
-        className="w-full h-full object-cover block"
+        preload="none"
+        onEnded={() => setHasStarted(false)}
+        className={`w-full h-full object-cover block ${hasStarted ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       >
         Seu navegador não suporta a reprodução deste vídeo.
       </video>
@@ -520,21 +546,27 @@ export const VideoTourPlayer: React.FC<VideoTourPlayerProps> = ({ src, poster, t
         <button
           type="button"
           onClick={handlePlay}
-          aria-label={`Reproduzir vídeo: ${title}`}
-          className="absolute inset-0 w-full h-full flex flex-col items-center justify-center cursor-pointer bg-black/20 hover:bg-black/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0066ff]"
+          aria-label={`Reproduzir vídeo com som: ${title}`}
+          className="absolute inset-0 z-10 w-full h-full flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0066ff]"
         >
-          <div className="transition-transform duration-200 group-hover:scale-110 active:scale-95 drop-shadow-[0_8px_24px_rgba(0,0,0,0.65)]">
-            <svg viewBox="0 0 68 48" className="w-16 h-12 sm:w-20 sm:h-14" aria-hidden="true">
+          <img
+            src={poster}
+            alt={title}
+            loading="lazy"
+            decoding="async"
+            width="854"
+            height="480"
+            className="absolute inset-0 w-full h-full object-cover block"
+          />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+          <span className="relative z-10 inline-flex items-center justify-center transition-transform duration-200 group-hover:scale-110 active:scale-95 drop-shadow-[0_10px_28px_rgba(0,0,0,0.75)]">
+            <svg viewBox="0 0 68 48" className="w-[74px] h-[52px] sm:w-[88px] sm:h-[62px]" aria-hidden="true">
               <path
                 d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z"
                 fill="#FF0000"
               />
               <path d="M45 24L27 14v20" fill="#FFFFFF" />
             </svg>
-          </div>
-
-          <span className="mt-3 px-4 py-1.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider text-white bg-black/75 backdrop-blur-md border border-white/20 shadow-lg">
-            Clique para assistir ao tour
           </span>
         </button>
       )}
@@ -552,6 +584,8 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   images,
   autoPlayInterval = 5000,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { isVisible, hasEntered } = useInViewport(containerRef, '600px 0px');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -570,7 +604,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   const goToSlide = (idx: number) => setCurrentIndex(idx);
 
   useEffect(() => {
-    if (isPaused || autoPlayInterval <= 0) return;
+    if (isPaused || !isVisible || autoPlayInterval <= 0) return;
 
     let timer: NodeJS.Timeout | null = null;
 
@@ -605,7 +639,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       stopTimer();
       document.removeEventListener('visibilitychange', handleVisibility);
     };
-  }, [isPaused, autoPlayInterval, nextSlide]);
+  }, [isPaused, isVisible, autoPlayInterval, nextSlide]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
@@ -630,6 +664,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
   return (
     <div
+      ref={containerRef}
       className="relative max-w-4xl mx-auto px-2 sm:px-4 py-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -641,14 +676,14 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           aria-label="Depoimento anterior"
           className="flex-shrink-0 z-30 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-black bg-white hover:bg-neutral-100 shadow-[0_0_20px_rgba(255,255,255,0.7),0_8px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border-2 border-white"
         >
-          <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 -ml-0.5 text-black stroke-[2.5]" />
+          <ChevronLeftIcon className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 -ml-0.5 text-black" />
         </button>
 
         <div className="relative w-full max-w-[270px] sm:max-w-[340px] md:max-w-[420px] select-none flex-shrink">
           <div
-            className="absolute -inset-3 rounded-[54px] pointer-events-none opacity-40 blur-2xl"
+            className="absolute -inset-6 rounded-[54px] pointer-events-none"
             style={{
-              background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4), transparent 70%)',
+              background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.16), transparent 68%)',
             }}
           />
 
@@ -684,7 +719,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     <img
                       src={imgUrl}
                       alt={`Depoimento ${index + 1}`}
-                      loading="lazy"
+                      loading={hasEntered ? 'eager' : 'lazy'}
                       decoding="async"
                       width="391"
                       height="800"
@@ -706,7 +741,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           aria-label="Próximo depoimento"
           className="flex-shrink-0 z-30 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-black bg-white hover:bg-neutral-100 shadow-[0_0_20px_rgba(255,255,255,0.7),0_8px_20px_rgba(0,0,0,0.6)] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border-2 border-white"
         >
-          <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 -mr-0.5 text-black stroke-[2.5]" />
+          <ChevronRightIcon className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 -mr-0.5 text-black" />
         </button>
       </div>
 
