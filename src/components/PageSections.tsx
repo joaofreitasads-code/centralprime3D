@@ -909,33 +909,34 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
           </div>
         </div>
 
-        {/* PLANO PREMIUM (CENTRO DESTAQUE BRANCO) */}
+        {/* PLANO PREMIUM (CENTRO DESTAQUE BLACK FRIDAY) */}
         <div
           id="oferta-3990"
-          className="order-1 lg:order-2 bg-white text-neutral-900 rounded-2xl p-6 sm:p-7 relative scroll-mt-24 transition-all duration-300"
+          className="order-1 lg:order-2 text-white rounded-2xl p-6 sm:p-7 relative scroll-mt-24 transition-all duration-300"
           style={{
-            border: '2.5px solid #00d964',
-            boxShadow: '0 0 42px rgba(0, 217, 100, 0.42), 0 0 18px rgba(0, 217, 100, 0.25)',
+            background: 'linear-gradient(180deg, #1a0b0d 0%, #0b0b0f 45%, #070709 100%)',
+            border: '2.5px solid #ef4444',
+            boxShadow: '0 0 44px rgba(239, 68, 68, 0.42), 0 0 18px rgba(0, 217, 100, 0.2)',
           }}
         >
           <div
             className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-4 py-1 rounded-full text-[11px] font-black uppercase tracking-wider text-white"
             style={{
-              backgroundColor: '#00b853',
-              boxShadow: '0 0 20px rgba(0, 217, 100, 0.65)',
+              backgroundImage: 'linear-gradient(135deg, #ef4444, #dc2626)',
+              boxShadow: '0 0 22px rgba(239, 68, 68, 0.7)',
             }}
           >
-            ★ MAIS ESCOLHIDO
+            🔥 BLACK FRIDAY • MAIS ESCOLHIDO
           </div>
 
           <div className="text-center mt-2">
-            <div className="text-[11px] font-black tracking-widest uppercase text-[#009e47]">
-              VITALÍCIO • TODOS OS BÔNUS
+            <div className="text-[11px] font-black tracking-widest uppercase text-[#ff4d4d]">
+              OFERTA BLACK FRIDAY • ACESSO VITALÍCIO
             </div>
-            <h3 className="mt-1 text-2xl font-black uppercase text-neutral-900">
+            <h3 className="mt-1 text-2xl font-black uppercase text-white">
               PLANO PREMIUM
             </h3>
-            <p className="mt-0.5 text-xs text-neutral-500">
+            <p className="mt-0.5 text-xs text-white/65">
               Mais conteúdo, todos os {BONUSES.length} bônus e acesso para sempre
             </p>
           </div>
@@ -943,7 +944,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
           <div className="mt-4 flex items-center justify-center">
             <img
               src="/assets/plan_showcase.webp"
-              alt="Central Prime 3D™ Premium"
+              alt="Central Prime 3D™ Premium Black Friday"
               loading="lazy"
               decoding="async"
               width="640"
@@ -952,41 +953,50 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
             />
           </div>
 
-          <div className="mt-4 rounded-xl bg-neutral-100 border border-neutral-200 py-4 px-4 text-center">
-            <div className="text-xs line-through text-neutral-400 font-semibold">
-              De R$ 197,00
+          <div
+            className="mt-4 rounded-xl py-4 px-4 text-center border"
+            style={{
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              borderColor: 'rgba(239, 68, 68, 0.55)',
+            }}
+          >
+            <div className="inline-block mb-1.5 px-2.5 py-0.5 rounded bg-[#ef4444] text-white text-[10px] font-black uppercase tracking-wider">
+              PREÇO ESPECIAL BLACK FRIDAY
             </div>
-            <div className="mt-0.5 text-4xl sm:text-5xl font-black text-neutral-900 tracking-tight">
-              <span className="text-xl font-extrabold mr-1">R$</span>57,90
+            <div className="text-xs line-through text-white/50 font-semibold">
+              De R$ 57,90 por apenas
             </div>
-            <div className="text-[11px] text-neutral-500 mt-1">
-              à vista no Pix ou até 5x de R$ 11,58 sem juros
+            <div className="mt-0.5 text-4xl sm:text-5xl font-black text-[#ff3b3b] tracking-tight">
+              <span className="text-xl font-extrabold mr-1 text-white">R$</span>39,90
+            </div>
+            <div className="text-[11px] text-white/70 mt-1">
+              à vista no Pix ou até 5x de R$ 7,98 sem juros
             </div>
           </div>
 
-          <ul className="mt-5 divide-y divide-neutral-200/80 text-xs sm:text-[13px] text-neutral-800">
+          <ul className="mt-5 divide-y divide-white/10 text-xs sm:text-[13px] text-white/85">
             <li className="py-2 flex items-center gap-2">
-              <span className="text-[#00a850] font-bold flex-shrink-0">✓</span>
+              <span className="text-[#00d964] font-bold flex-shrink-0">✓</span>
               <span>+150.000 Arquivos STL Organizados</span>
             </li>
-            <li className="py-2 flex items-center gap-2 font-bold text-[#009e47]">
-              <span className="text-[#00a850] font-bold flex-shrink-0">✓</span>
+            <li className="py-2 flex items-center gap-2 font-bold text-[#00d964]">
+              <span className="text-[#00d964] font-bold flex-shrink-0">✓</span>
               <span>Acesso Vitalício (pague 1 vez, use para sempre)</span>
             </li>
             <li className="py-2 flex items-center gap-2">
-              <span className="text-[#00a850] font-bold flex-shrink-0">✓</span>
+              <span className="text-[#00d964] font-bold flex-shrink-0">✓</span>
               <span>Uso comercial liberado</span>
             </li>
             {visibleBonuses.map((bonus) => (
               <li key={bonus.id} className="py-2 flex items-center gap-2">
-                <span className="text-[#00a850] font-bold flex-shrink-0">✓</span>
+                <span className="text-[#00d964] font-bold flex-shrink-0">✓</span>
                 <span>
                   Bônus {bonus.id}: {BONUS_SHORT_TITLES[bonus.id] || bonus.title}
                 </span>
               </li>
             ))}
             <li className="py-2 flex items-center gap-2">
-              <span className="text-[#00a850] font-bold flex-shrink-0">✓</span>
+              <span className="text-[#00d964] font-bold flex-shrink-0">✓</span>
               <span>Download imediato e Garantia de 14 dias</span>
             </li>
           </ul>
@@ -994,7 +1004,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
           <button
             type="button"
             onClick={() => setShowAllBonuses((prev) => !prev)}
-            className="mt-2 w-full py-2 text-center text-xs font-extrabold text-[#009e47] hover:text-[#007a36] cursor-pointer transition-colors"
+            className="mt-2 w-full py-2 text-center text-xs font-extrabold text-[#ff4d4d] hover:text-[#ff7070] cursor-pointer transition-colors"
           >
             {showAllBonuses
               ? `− Ocultar os outros ${hiddenCount} bônus •`
@@ -1005,14 +1015,14 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
             href={CHECKOUT_URLS.premium}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Plano Vitalício Completo R$ 57,90', 57.90)}
-            className="mt-4 block text-center w-full py-4 rounded-full font-black uppercase text-sm tracking-wide text-white shadow-xl hover:brightness-105 hover:scale-[1.02] active:scale-95 transition-all"
+            onClick={() => trackInitiateCheckout('Plano Vitalício Completo Black Friday R$ 39,90', 39.90)}
+            className="mt-4 block text-center w-full py-4 rounded-full font-black uppercase text-sm tracking-wide text-black shadow-xl hover:brightness-105 hover:scale-[1.02] active:scale-95 transition-all"
             style={{
-              backgroundColor: '#00a850',
-              boxShadow: '0 8px 28px rgba(0, 168, 80, 0.45)',
+              backgroundImage: 'linear-gradient(135deg, #00ff66, #00d964)',
+              boxShadow: '0 8px 28px rgba(0, 217, 100, 0.45)',
             }}
           >
-            QUERO O PLANO PREMIUM
+            GARANTIR BLACK FRIDAY POR R$ 39,90
           </a>
         </div>
 

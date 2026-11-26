@@ -36,7 +36,7 @@ export default function App() {
     const video = heroVideoRef.current;
     if (video) {
       if (!video.getAttribute('src')) {
-        video.src = 'https://i.imgur.com/P75CKxE.mp4';
+        video.src = 'https://i.imgur.com/l6o7tVf.mp4';
       }
       video.muted = false;
       video.volume = 1;
@@ -132,8 +132,8 @@ export default function App() {
                     loading="eager"
                     decoding="sync"
                     fetchPriority="high"
-                    width="304"
-                    height="540"
+                    width="360"
+                    height="640"
                     className="absolute inset-0 h-full w-full object-cover block"
                   />
                   <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors" />
