@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SELECTED_MODELS,
   SELECTED_MODELS_ROW2,
@@ -19,24 +19,32 @@ import {
   VideoTourPlayer,
   PricingSection,
   GallerySection,
+  SpecialOfferModal,
 } from './components/PageSections';
-
-// Lazy-load modal to avoid loading motion library on initial page render
-const SpecialOfferModal = React.lazy(() =>
-  import('./components/SpecialOfferModal').then((m) => ({ default: m.SpecialOfferModal }))
-);
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [heroVideoStarted, setHeroVideoStarted] = useState(false);
+  const [heroVideoWarm, setHeroVideoWarm] = useState(false);
   const heroVideoRef = React.useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const warm = () => setHeroVideoWarm(true);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(warm, { timeout: 600 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = globalThis.setTimeout(warm, 250);
+    return () => globalThis.clearTimeout(timer);
+  }, []);
 
   const handleHeroVideoPlay = () => {
     setHeroVideoStarted(true);
+    setHeroVideoWarm(true);
     const video = heroVideoRef.current;
     if (video) {
       if (!video.getAttribute('src')) {
-        video.src = 'https://i.imgur.com/l6o7tVf.mp4';
+        video.src = '/assets/hero_vsl.mp4';
       }
       video.muted = false;
       video.volume = 1;
@@ -109,10 +117,11 @@ export default function App() {
             >
               <video
                 ref={heroVideoRef}
+                src={heroVideoWarm || heroVideoStarted ? '/assets/hero_vsl.mp4' : undefined}
                 title="Vídeo de apresentação da Central Prime 3D"
                 controls={heroVideoStarted}
                 playsInline
-                preload="none"
+                preload={heroVideoWarm ? 'auto' : 'none'}
                 onEnded={() => setHeroVideoStarted(false)}
                 className={`absolute inset-0 h-full w-full object-cover ${heroVideoStarted ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
               >
@@ -605,7 +614,7 @@ export default function App() {
 
           {/* Vídeo Tour da Área de Membros VIP */}
           <VideoTourPlayer
-            src="https://i.imgur.com/fxPFHOn.mp4"
+            src="/assets/area_tour.mp4"
             poster="/assets/area_membros_new_poster.webp"
             title="Área de Membros VIP — Central Prime 3D"
           />
@@ -904,7 +913,7 @@ export default function App() {
             href={CHECKOUT_URLS.premium}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Plano Vitalício Completo - CTA Final R$ 57,90', 57.90)}
+            onClick={() => trackInitiateCheckout('Plano Vitalício Completo Black Friday - CTA Final R$ 39,90', 39.90)}
             className="inline-block mt-8 px-8 py-4 rounded-full font-black text-lg uppercase tracking-wider text-black shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00e64d)',
@@ -932,14 +941,12 @@ export default function App() {
         </footer>
       </div>
 
-      {/* SPECIAL OFFER MODAL (LOADED ONLY WHEN REQUESTED) */}
+      {/* SPECIAL OFFER MODAL */}
       {isModalOpen && (
-        <Suspense fallback={null}>
-          <SpecialOfferModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
-        </Suspense>
+        <SpecialOfferModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       )}
     </div>
   );
