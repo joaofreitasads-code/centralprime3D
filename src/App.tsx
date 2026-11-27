@@ -63,8 +63,22 @@ export default function App() {
   return (
     <div className="min-h-screen text-white relative overflow-hidden bg-black">
       <div className="relative z-10">
+        {/* TOP ANNOUNCEMENT BAR */}
+        <a
+          href="#oferta-3990"
+          onClick={scrollToPremiumOffer}
+          className="block w-full px-3 py-2.5 text-center text-[11px] sm:text-xs md:text-sm font-black uppercase tracking-wide text-white border-b border-white/20 shadow-[0_4px_20px_rgba(220,38,38,0.35)] transition-opacity hover:opacity-95"
+          style={{
+            backgroundImage: 'linear-gradient(90deg, #991b1b 0%, #dc2626 38%, #16a34a 62%, #14532d 100%)',
+          }}
+        >
+          <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]">
+            🔥🎄 BLACK FRIDAY &amp; NATAL: TODO O SITE COM 40% DE DESCONTO POR TEMPO LIMITADO! 🎄🔥
+          </span>
+        </a>
+
         {/* HERO SECTION */}
-        <section id="hero" className="px-4 pt-16 pb-16 text-center scroll-mt-16">
+        <section id="hero" className="px-4 pt-10 sm:pt-12 pb-16 text-center scroll-mt-16">
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider"
             style={{
