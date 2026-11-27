@@ -966,13 +966,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
               PREÇO ESPECIAL BLACK FRIDAY
             </div>
             <div className="text-xs line-through text-white/50 font-semibold">
-              De R$ 57,90 por apenas
+              De R$ 197,00 por apenas
             </div>
             <div className="mt-0.5 text-4xl sm:text-5xl font-black text-[#ff3b3b] tracking-tight">
-              <span className="text-xl font-extrabold mr-1 text-white">R$</span>39,90
+              <span className="text-xl font-extrabold mr-1 text-white">R$</span>57,90
             </div>
             <div className="text-[11px] text-white/70 mt-1">
-              à vista no Pix ou até 5x de R$ 7,98 sem juros
+              à vista no Pix ou até 5x de R$ 11,58 sem juros
             </div>
           </div>
 
@@ -1017,14 +1017,14 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
             href={CHECKOUT_URLS.premium}
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackInitiateCheckout('Plano Vitalício Completo Black Friday R$ 39,90', 39.90)}
+            onClick={() => trackInitiateCheckout('Plano Vitalício Completo Black Friday R$ 57,90', 57.90)}
             className="mt-4 block text-center w-full py-4 rounded-full font-black uppercase text-sm tracking-wide text-black shadow-xl hover:brightness-105 hover:scale-[1.02] active:scale-95 transition-all"
             style={{
               backgroundImage: 'linear-gradient(135deg, #00ff66, #00d964)',
               boxShadow: '0 8px 28px rgba(0, 217, 100, 0.45)',
             }}
           >
-            GARANTIR BLACK FRIDAY POR R$ 39,90
+            GARANTIR BLACK FRIDAY POR R$ 57,90
           </a>
         </div>
 
