@@ -854,13 +854,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
 
             <div className="mt-5 flex items-center justify-center">
               <img
-                src="/assets/plan_showcase.webp"
+                src="/assets/plan_premium_bf.webp"
                 alt="Central Prime 3D™ Plano Básico"
                 loading="lazy"
                 decoding="async"
-                width="640"
-                height="406"
-                className="w-full max-w-[290px] h-auto object-contain"
+                width="560"
+                height="374"
+                className="w-full max-w-[310px] h-auto object-contain rounded-xl border border-white/10"
               />
             </div>
 
@@ -928,7 +928,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
               boxShadow: '0 0 22px rgba(239, 68, 68, 0.7)',
             }}
           >
-            🔥 BLACK FRIDAY • MAIS ESCOLHIDO
+            🔥 BLACK FRIDAY • 40% OFF
           </div>
 
           <div className="text-center mt-2">
@@ -945,13 +945,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
 
           <div className="mt-4 flex items-center justify-center">
             <img
-              src="/assets/plan_showcase.webp"
+              src="/assets/plan_premium_bf.webp"
               alt="Central Prime 3D™ Premium Black Friday"
               loading="lazy"
               decoding="async"
-              width="640"
-              height="406"
-              className="w-full max-w-[310px] h-auto object-contain"
+              width="560"
+              height="374"
+              className="w-full max-w-[330px] h-auto object-contain rounded-xl border border-white/10"
             />
           </div>
 
@@ -972,7 +972,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
               <span className="text-xl font-extrabold mr-1 text-white">R$</span>57,90
             </div>
             <div className="text-[11px] text-white/70 mt-1">
-              à vista no Pix ou até 5x de R$ 11,58 sem juros
+              à vista no Pix ou até 12x de R$ 4,83 sem juros
             </div>
           </div>
 
@@ -1049,13 +1049,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBasicModal
 
             <div className="mt-5 flex items-center justify-center">
               <img
-                src="/assets/plan_showcase.webp"
+                src="/assets/plan_premium_bf.webp"
                 alt="Central Prime 3D™ Plano Plus"
                 loading="lazy"
                 decoding="async"
-                width="640"
-                height="406"
-                className="w-full max-w-[290px] h-auto object-contain"
+                width="560"
+                height="374"
+                className="w-full max-w-[310px] h-auto object-contain rounded-xl border border-white/10"
               />
             </div>
 
